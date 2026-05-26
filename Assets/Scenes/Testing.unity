@@ -484,6 +484,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Swat
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: e2aa1d0137805bc4ca485306d475df77, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 888cd299f4f510c42ad7e54d450ea87b, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

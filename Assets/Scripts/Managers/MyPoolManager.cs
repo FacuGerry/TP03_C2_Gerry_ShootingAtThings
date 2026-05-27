@@ -6,37 +6,28 @@ using UnityEngine.SceneManagement;
 
 public class MyPoolManager : MonoBehaviour
 {
-    public static MyPoolManager Instance;
-
-    [SerializeField] private PoolSettingsSO _prefabs;
+    private PoolSettingsSO _settings;
     private Dictionary<Type, List<IPooleable>> _pooleablesDictionary = new Dictionary<Type, List<IPooleable>>();
 
     private void Awake()
     {
-        if (Instance != null)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
-        InitializePool();
-
         SceneManager.activeSceneChanged += SceneManager_activeSceneChanged;
     }
 
     private void OnDestroy()
     {
-        if (Instance == this)
-            Instance = null;
-
         SceneManager.activeSceneChanged -= SceneManager_activeSceneChanged;
+    }
+
+    public void Init(PoolSettingsSO settings)
+    {
+        _settings = settings;
+        InitializePool();
     }
 
     private void InitializePool()
     {
-        foreach (PoolSetting pool in _prefabs.poolSettings)
+        foreach (PoolSetting pool in _settings.poolSettings)
         {
             IPooleable pooleable = pool.prefab.GetComponent<IPooleable>();
 

@@ -1,29 +1,17 @@
+using System;
 using UnityEngine;
 
 public class SfxManager : MonoBehaviour
 {
-    public static SfxManager Instance;
+    private SoundDataSO _data;
+    private AudioSource _sfx;
+    private AudioSource _ui;
 
-    [SerializeField] private SoundDataSO _data;
-    [SerializeField] private AudioSource _sfx;
-    [SerializeField] private AudioSource _ui;
-
-    private void Awake()
+    public void Init(SoundDataSO soundSettings, AudioSource sfx, AudioSource ui)
     {
-        if (Instance != null)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
-    }
-
-    private void OnDestroy()
-    {
-        if (Instance == this)
-            Instance = null;
+        _data = soundSettings;
+        _sfx = sfx;
+        _ui = ui;
     }
 
     public void OnPlayerShoot_PlayClip() => _sfx.PlayOneShot(_data.playerShootClip);

@@ -4,6 +4,17 @@ public class GameBootstrapper : MonoBehaviour
 {
     public static GameBootstrapper Instance;
 
+    // Services
+    public MyPoolManager PoolManager {  get; private set; }
+    public CustomSceneManager CustomSceneManager { get; private set; }
+    public SfxManager SfxManager { get; private set; }
+
+    [Header("References")]
+    [SerializeField] private PoolSettingsSO _poolSettings;
+    [SerializeField] private SoundDataSO _soundSettings;
+    [SerializeField] private AudioSource _sourceSfx;
+    [SerializeField] private AudioSource _sourceUi;
+
     private void Awake()
     {
         if (Instance != null)
@@ -13,11 +24,39 @@ public class GameBootstrapper : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
+
+        InitializePoolManager();
+        InitializeCustomSceneManager();
+        //InitializeSfxManager();
     }
 
     private void OnDestroy()
     {
         if (Instance == this)
             Instance = null;
+    }
+
+    private void InitializePoolManager()
+    {
+        GameObject go = new("Pool Manager");
+        go.transform.SetParent(transform);
+        PoolManager = go.AddComponent<MyPoolManager>();
+        PoolManager.Init(_poolSettings);
+    }
+
+    private void InitializeCustomSceneManager()
+    {
+        GameObject go = new("Custom Scene Manager");
+        go.transform.SetParent(transform);
+        CustomSceneManager = go.AddComponent<CustomSceneManager>();
+        CustomSceneManager.Init();
+    }
+
+    private void InitializeSfxManager()
+    {
+        GameObject go = new("Sfx Manager");
+        go.transform.SetParent(transform);
+        SfxManager = go.AddComponent<SfxManager>();
+        SfxManager.Init(_soundSettings, _sourceSfx, _sourceUi);
     }
 }

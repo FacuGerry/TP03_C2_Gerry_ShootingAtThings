@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
     private Animator _anim;
     private Rigidbody _rb;
 
+    public PlayerShoot Shoot { get; private set; }
+
     private List<PlayerStates> _states = new();
     private PlayerStates _currentState;
 
@@ -31,6 +33,7 @@ public class PlayerController : MonoBehaviour
     {
         _anim = GetComponent<Animator>();
         _rb = GetComponent<Rigidbody>();
+        Shoot = GetComponent<PlayerShoot>();
 
         _states.Clear();
 

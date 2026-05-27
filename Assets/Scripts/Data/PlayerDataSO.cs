@@ -13,4 +13,9 @@ public class PlayerDataSO : ScriptableObject
     public float rotationSpeedVer;
     public float rotationMinVer;
     public float rotationMaxVer;
+
+    [Header("Shooting")]
+    public float shootingDistance;
+    public int shootingDamage;
+    public float shootingSpeed;
 }

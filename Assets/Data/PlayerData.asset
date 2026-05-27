@@ -19,3 +19,6 @@ MonoBehaviour:
   rotationSpeedVer: 25
   rotationMinVer: -15
   rotationMaxVer: 25
+  shootingDistance: 40
+  shootingDamage: 10
+  shootingSpeed: 0.15

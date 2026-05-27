@@ -12,5 +12,11 @@ public class StateShoot : PlayerStates
     {
         base.OnEnter();
         _anim.SetInteger(_state, (int)state);
+        _controller.Shoot.ToogleShooting(true);
+    }
+
+    public override void OnExit()
+    {
+        _controller.Shoot.ToogleShooting(false);
     }
 }

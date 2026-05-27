@@ -8,10 +8,6 @@ public class SoundDataSO : ScriptableObject
     [Header("Mixer")]
     public AudioMixer mixer;
 
-    [Header("Audio Sources")]
-    public AudioSource sfx;
-    public AudioSource ui;
-
     [Header("Player clips")]
     public AudioClip playerShootClip;
     public AudioClip playerSecondShoot;

@@ -5,6 +5,8 @@ public class SfxManager : MonoBehaviour
     public static SfxManager Instance;
 
     [SerializeField] private SoundDataSO _data;
+    [SerializeField] private AudioSource _sfx;
+    [SerializeField] private AudioSource _ui;
 
     private void Awake()
     {
@@ -24,21 +26,21 @@ public class SfxManager : MonoBehaviour
             Instance = null;
     }
 
-    public void OnPlayerShoot_PlayClip() => _data.sfx.PlayOneShot(_data.playerShootClip);
+    public void OnPlayerShoot_PlayClip() => _sfx.PlayOneShot(_data.playerShootClip);
 
-    public void OnPlayerSecondShoot_PlayClip() => _data.sfx.PlayOneShot(_data.playerSecondShoot);
+    public void OnPlayerSecondShoot_PlayClip() => _sfx.PlayOneShot(_data.playerSecondShoot);
 
-    public void OnEnemyShoot_PlayClip() => _data.sfx.PlayOneShot(_data.enemyShoot);
+    public void OnEnemyShoot_PlayClip() => _sfx.PlayOneShot(_data.enemyShoot);
 
-    public void OnPlayerDamaged_PlayClip() => _data.sfx.PlayOneShot(_data.playerDamaged);
+    public void OnPlayerDamaged_PlayClip() => _sfx.PlayOneShot(_data.playerDamaged);
 
-    public void OnPlayerDie_PlayClip() => _data.sfx.PlayOneShot(_data.playerDie);
+    public void OnPlayerDie_PlayClip() => _sfx.PlayOneShot(_data.playerDie);
 
-    public void OnNpcDamaged_PlayClip() => _data.sfx.PlayOneShot(_data.enemyDamaged);
+    public void OnNpcDamaged_PlayClip() => _sfx.PlayOneShot(_data.enemyDamaged);
 
-    public void OnNpcDie_PlayClip() => _data.sfx.PlayOneShot(_data.enemyDie);
+    public void OnNpcDie_PlayClip() => _sfx.PlayOneShot(_data.enemyDie);
 
-    public void OnButtonHover_PlayClip() => _data.ui.PlayOneShot(_data.btnHover);
+    public void OnButtonHover_PlayClip() => _ui.PlayOneShot(_data.btnHover);
 
-    public void OnButtonClick_PlayClip() => _data.ui.PlayOneShot(_data.btnClick);
+    public void OnButtonClick_PlayClip() => _ui.PlayOneShot(_data.btnClick);
 }

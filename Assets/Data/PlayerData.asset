@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerDataSO
   movementSpeed: 15
   jumpForce: 5
-  cameraFollowSpeed: 25
-  rotationSpeedHor: 50
+  cameraFollowSpeed: 50
+  rotationSpeedHor: 100
   rotationSpeedVer: 25
   rotationMinVer: -15
   rotationMaxVer: 25

@@ -87,18 +87,25 @@ public class PlayerController : MonoBehaviour
 
         _isWalking = Input.GetKey(KeyCode.LeftShift);
 
-        _wantsCrouch = Input.GetKey(KeyCode.LeftControl);
+        _wantsCrouch = Input.GetKeyDown(KeyCode.LeftControl);
         _wantsShoot = Input.GetMouseButton(0);
         _wantsJump = Input.GetKeyDown(KeyCode.Space);
 
         _currentState.OnUpdate();
         EvaluateTransitions();
         MovePlayer();
+        UpdateAnimatorInputs();
     }
 
     private void FixedUpdate()
     {
         _rb.AddForce(_data.movementSpeed * _speedChanger * _direction, ForceMode.Force);
+    }
+
+    private void UpdateAnimatorInputs()
+    {
+        _anim.SetFloat("Input X", _moveInput.x);
+        _anim.SetFloat("Input Y", _moveInput.y);
     }
 
     public void MovePlayer()
@@ -109,7 +116,7 @@ public class PlayerController : MonoBehaviour
         _direction = direction;
 
         if (IsCrouching)
-            _speedChanger = 0.5f;
+            _speedChanger = 0.75f;
         else
         {
             if (_isWalking)

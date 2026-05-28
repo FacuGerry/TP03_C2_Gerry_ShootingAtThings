@@ -13,8 +13,6 @@ MonoBehaviour:
   m_Name: SoundData
   m_EditorClassIdentifier: Assembly-CSharp::SoundDataSO
   mixer: {fileID: 24100000, guid: 55281b7de48a9764da5948bf491e009b, type: 2}
-  sfx: {fileID: 0}
-  ui: {fileID: 0}
   playerShootClip: {fileID: 0}
   playerSecondShoot: {fileID: 0}
   playerDamaged: {fileID: 0}

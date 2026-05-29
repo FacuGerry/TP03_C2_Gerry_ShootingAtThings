@@ -11,7 +11,8 @@ public class StateWalk : PlayerStates
     public override void OnEnter()
     {
         base.OnEnter();
-        _anim.SetInteger(_state, (int)state);
+        int initialState = _controller.IsWalking ? (int)StateTypePlayer.Walk : (int)StateTypePlayer.Run;
+        _anim.SetInteger(_state, initialState);
     }
 
     public override void OnUpdate()
@@ -36,12 +37,16 @@ public class StateWalk : PlayerStates
             return;
         }
 
+        if (_controller.MoveInput.sqrMagnitude < 0.01f)
+        {
+            _controller.SwitchState(_controller.FindState(StateTypePlayer.Idle));
+            return;
+        }
+
         if (_controller.IsWalking && _anim.GetInteger(_state) != (int)state)
             _anim.SetInteger(_state, (int)state);
 
         if (!_controller.IsWalking && _anim.GetInteger(_state) != (int)StateTypePlayer.Run)
             _anim.SetInteger(_state, (int)StateTypePlayer.Run);
-
-        _controller.SwitchState(_controller.FindState(StateTypePlayer.Idle));
     }
 }

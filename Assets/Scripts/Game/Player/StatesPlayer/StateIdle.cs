@@ -16,7 +16,7 @@ public class StateIdle : PlayerStates
 
     public override void OnUpdate()
     {
-        if (_controller.MoveInput.magnitude > 0.1f)
+        if (_controller.MoveInput.magnitude > 0.01f)
         {
             _controller.SwitchState(_controller.FindState(StateTypePlayer.Walk));
             return;

@@ -16,6 +16,12 @@ public class StateCrouchIdle : PlayerStates
 
     public override void OnUpdate()
     {
+        if (_controller.MoveInput.magnitude > 0.01f)
+        {
+            _controller.SwitchState(_controller.FindState(StateTypePlayer.CrouchMove));
+            return;
+        }
+
         if (_controller.WantsCrouch)
         {
             _controller.SwitchState(_controller.FindState(StateTypePlayer.CrouchToStandUp));

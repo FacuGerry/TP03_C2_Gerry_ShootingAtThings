@@ -30,6 +30,10 @@ public class StateCrouchMove : PlayerStates
             return;
         }
 
-        _controller.SwitchState(_controller.FindState(StateTypePlayer.CrouchIdle));
+        if (_controller.MoveInput.sqrMagnitude < 0.01f)
+        {
+            _controller.SwitchState(_controller.FindState(StateTypePlayer.CrouchIdle));
+            return;
+        }
     }
 }

@@ -19,8 +19,6 @@ public class PlayerController : MonoBehaviour
 
     private float _speedChanger = 1f;
 
-    private Vector2 _moveInput = Vector2.zero;
-
     private bool _isAlive = true;
     public Vector2 MoveInput { get; private set; }
     public bool IsWalking { get; private set; }
@@ -51,14 +49,17 @@ public class PlayerController : MonoBehaviour
 
         foreach (PlayerStates state in _states)
             state.Initialize(_anim, _rb, this);
+    }
 
+    private void Start()
+    {
         _currentState = FindState(StateTypePlayer.Idle);
         _currentState.OnEnter();
     }
 
     private void Update()
     {
-        _moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        MoveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
         IsWalking = Input.GetKey(KeyCode.LeftShift);
 
@@ -80,13 +81,13 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateAnimatorInputs()
     {
-        _anim.SetFloat("Input X", _moveInput.x);
-        _anim.SetFloat("Input Y", _moveInput.y);
+        _anim.SetFloat("Input X", MoveInput.x);
+        _anim.SetFloat("Input Y", MoveInput.y);
     }
 
     public void CalculatePlayerSpeed()
     {
-        Vector3 direction = transform.forward * _moveInput.y + transform.right * _moveInput.x;
+        Vector3 direction = transform.forward * MoveInput.y + transform.right * MoveInput.x;
         _direction = direction.normalized;
 
         if (IsCrouching)

@@ -275,6 +275,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 165910462}
+  - component: {fileID: 165910463}
   m_Layer: 0
   m_Name: WeaponPivot
   m_TagString: Untagged
@@ -298,6 +299,19 @@ Transform:
   - {fileID: 1819566768}
   m_Father: {fileID: 1823743247}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &165910463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 165910461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85b44d80a6f14c541b112480af4eb211, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponFollowPlayerMovement
+  _follow: {fileID: 1482002732}
 --- !u!1 &265222008
 GameObject:
   m_ObjectHideFlags: 0
@@ -861,7 +875,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -3480699329000672020, guid: e2aa1d0137805bc4ca485306d475df77, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1482002732}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e2aa1d0137805bc4ca485306d475df77, type: 3}
       insertIndex: -1
@@ -1447,6 +1464,42 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1482002731
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1482002732}
+  m_Layer: 0
+  m_Name: WeaponFollow
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1482002732
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1482002731}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.0050939354, y: -0.0000019675715, z: -0.00000026513163, w: 0.99998707}
+  m_LocalPosition: {x: 0.06000069, y: 0.32194462, z: -0.086138465}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1579206713}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1579206713 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -3480699329000672020, guid: e2aa1d0137805bc4ca485306d475df77, type: 3}
+  m_PrefabInstance: {fileID: 907883116}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1667805470
 GameObject:
   m_ObjectHideFlags: 0

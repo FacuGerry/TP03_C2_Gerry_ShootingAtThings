@@ -3,6 +3,7 @@ using UnityEngine;
 public abstract class EnemyStates
 {
     public StateTypeEnemy state;
+    protected EnemyClasses _enemyClass;
     protected Animator _anim;
     protected Rigidbody _rb;
     protected NpcController _controller;

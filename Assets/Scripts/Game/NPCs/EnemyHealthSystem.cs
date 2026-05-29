@@ -1,7 +1,11 @@
+using System;
 using UnityEngine;
 
 public class EnemyHealthSystem : MonoBehaviour, IDamageable
 {
+    public event Action OnEnemyDamaged;
+    public event Action OnEnemyDie;
+
     [SerializeField] private int _maxHealth;
     private int _health;
 
@@ -17,10 +21,12 @@ public class EnemyHealthSystem : MonoBehaviour, IDamageable
         {
             _health = 0;
             // sfx & vfx for dead
+            OnEnemyDie?.Invoke();
             gameObject.SetActive(false);
         }
         else
         {
+            OnEnemyDamaged?.Invoke();
             // sfx & vfx for damaged
         }
     }

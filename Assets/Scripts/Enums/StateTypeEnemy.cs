@@ -2,7 +2,7 @@ public enum StateTypeEnemy
 {
     None = -1,
     Idle,
-    Shoot,
+    Attack,
     Roam,
     Follow,
     Die

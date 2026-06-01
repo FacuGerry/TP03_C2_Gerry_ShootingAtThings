@@ -4,7 +4,7 @@ using UnityEngine;
 public class EnemyShoot : MonoBehaviour
 {
     [SerializeField] private GameObject _laser;
-    [SerializeField] private Transform _player;
+    [SerializeField] private GameDataSO _gameData;
     [SerializeField] private Transform _shootingPos;
     [SerializeField] private float _distance;
     [SerializeField] private int _damage;
@@ -29,7 +29,7 @@ public class EnemyShoot : MonoBehaviour
         while (clock < _waitingTime)
         {
             clock += Time.deltaTime;
-            transform.LookAt(_player);
+            transform.LookAt(_gameData.player.transform);
             yield return null;
         }
 

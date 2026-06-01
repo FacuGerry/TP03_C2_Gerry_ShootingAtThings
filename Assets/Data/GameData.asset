@@ -9,11 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 228d26399757e8b4c830f4bb39f9c637, type: 3}
-  m_Name: LaserEnemy
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyDataSO
-  enemyClass: 0
-  attackType: 0
-  distanceToShoot: 10
-  shootingDamage: 10
-  canMove: 0
+  m_Script: {fileID: 11500000, guid: 5bdeec72d80c8e545ad7868322990a9f, type: 3}
+  m_Name: GameData
+  m_EditorClassIdentifier: Assembly-CSharp::GameDataSO
+  player: {fileID: 966096072527412314, guid: 6b46802a7f1fb864bbb460f79976b83b, type: 3}

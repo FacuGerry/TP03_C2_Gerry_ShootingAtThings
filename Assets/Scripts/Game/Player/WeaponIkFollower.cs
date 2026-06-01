@@ -1,10 +1,11 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
 
 public class WeaponIkFollower : MonoBehaviour
 {
-    [SerializeField] private WeaponDataSO[] _data;
+    [SerializeField] private List<Weapon> _weaponsList = new();
     private Animator _anim;
     private int _index = 0;
 
@@ -20,7 +21,7 @@ public class WeaponIkFollower : MonoBehaviour
 
     private void AnimateIK()
     {
-        foreach (CustomIkController ik in _data[_index].controller)
+        foreach (CustomIkController ik in _weaponsList[_index].controller)
         {
             _anim.SetIKPositionWeight(ik.goal, ik.weight);
             _anim.SetIKRotationWeight(ik.goal, ik.weight);
@@ -30,6 +31,5 @@ public class WeaponIkFollower : MonoBehaviour
         }
     }
 
-    public void ChangeIndex(bool isAdding) => _index += isAdding ? 1 : -1;
-    public void ChangeIndexByNumber(int num) => _index = num;
+    public void ChangeIndex(int index) => _index = index;
 }

@@ -1,8 +1,11 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour, IPooleable
 {
     public bool IsActive { get; set; }
+
+    public List<CustomIkController> controller;
 
     public void Activate()
     {

@@ -7,7 +7,9 @@ public class NpcController : MonoBehaviour, IPooleable
 {
     [SerializeField] private EnemyDataSO _data;
     [SerializeField] private Animator _anim;
-    [SerializeField] private GameObject _player; // this should be received from a SO of the game settings
+    [SerializeField] private GameDataSO _gameData;
+    
+    private GameObject _player;
     public GameObject Player => _player;
     public float ThrowingHeight { get; private set; } = 5f;
     public float ThrowingDuration { get; private set; } = 5f;
@@ -38,6 +40,11 @@ public class NpcController : MonoBehaviour, IPooleable
     private void OnEnable()
     {
         _healthSystem.OnEnemyDie += OnEnemyDie_ChangeState;
+    }
+
+    private void Start()
+    {
+        _player = _gameData.player;
     }
 
     private void Update()

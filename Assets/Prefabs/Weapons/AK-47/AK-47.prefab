@@ -9,13 +9,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4525744322288632244}
+  - component: {fileID: 2178721825386117531}
   m_Layer: 0
   m_Name: AK-47
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4525744322288632244
 Transform:
   m_ObjectHideFlags: 0
@@ -32,6 +33,25 @@ Transform:
   - {fileID: 4035334077523740835}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2178721825386117531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 742821998072145001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dd248b726cf8a84996b32a80e41d08c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Weapon
+  controller:
+  - goal: 2
+    target: {fileID: 4267149719948245217}
+    weight: 1
+  - goal: 3
+    target: {fileID: 1901173435375307703}
+    weight: 1
 --- !u!1 &6933583028927509893
 GameObject:
   m_ObjectHideFlags: 0

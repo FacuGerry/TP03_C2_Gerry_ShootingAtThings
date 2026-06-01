@@ -5,6 +5,16 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    // INPUTS
+    private readonly string _inputX = "Input X";
+    private readonly string _inputY = "Input Y";
+    private readonly string _hor = "Horizontal";
+    private readonly string _ver = "Vertical";
+    private readonly string _crouch = "Crouch";
+    private readonly string _jump = "Jump";
+    private readonly string _shoot = "Shoot";
+    private readonly string _walk = "Walk";
+
     [SerializeField] private PlayerDataSO _data;
     [SerializeField] private Animator _anim;
 
@@ -59,14 +69,14 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        MoveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        MoveInput = new Vector2(Input.GetAxisRaw(_hor), Input.GetAxisRaw(_ver));
 
-        IsWalking = Input.GetKey(KeyCode.LeftShift);
+        IsWalking = Input.GetAxisRaw(_walk) != 0f;
 
-        WantsCrouch = Input.GetKeyDown(KeyCode.LeftControl);
-        WantsJump = Input.GetKeyDown(KeyCode.Space);
+        WantsCrouch = Input.GetAxisRaw(_crouch) != 0f;
+        WantsJump = Input.GetAxisRaw(_jump) != 0f;
 
-        WantsShoot = Input.GetMouseButton(0);
+        WantsShoot = Input.GetAxisRaw(_shoot) != 0f;
 
         _currentState.OnUpdate();
 
@@ -81,8 +91,8 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateAnimatorInputs()
     {
-        _anim.SetFloat("Input X", MoveInput.x);
-        _anim.SetFloat("Input Y", MoveInput.y);
+        _anim.SetFloat(_inputX, MoveInput.x);
+        _anim.SetFloat(_inputY, MoveInput.y);
     }
 
     public void CalculatePlayerSpeed()

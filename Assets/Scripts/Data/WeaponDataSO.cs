@@ -4,6 +4,7 @@ using UnityEngine;
 public class WeaponDataSO : ScriptableObject
 {
     public GameObject prefab;
+    public CustomIkController[] controller;
 
     [Header("Shooting")]
     public float shootingDistance;

@@ -11,11 +11,11 @@ public class SpawnEnemies : MonoBehaviour
     {
         _mng = GameBootstrapper.Instance.PoolManager;
 
-        int size = _mng.GetPoolSize<EnemyShoot>();
+        int size = _mng.GetPoolSize<NpcController>(); // get enemy list size
 
         for (int j = 0; j < size; j++)
         {
-            EnemyShoot enemy = _mng.GetInstanceFromPool<EnemyShoot>(); // take new enemy
+            NpcController enemy = _mng.GetInstanceFromPool<NpcController>(); // take new enemy
 
             BoxCollider coll = null;
             for (int i = 0; i < _spawnPlaces.Length; i++) // set which collider it will use to spawn

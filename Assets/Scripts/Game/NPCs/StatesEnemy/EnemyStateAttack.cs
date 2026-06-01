@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Animations.Rigging;
 
 public class EnemyStateAttack : EnemyStates
 {
@@ -32,7 +31,7 @@ public class EnemyStateAttack : EnemyStates
                 break;
 
             case EnemyAttackType.ThrowObject:
-                _controller.Shoot.ThrowObject(true);
+                _controller.Shoot.ThrowObject(_controller.Shoot.ShootingPos, _controller.ThrowingHeight, _controller.ThrowingDuration, _controller.Player);
                 break;
         }
     }
@@ -41,8 +40,6 @@ public class EnemyStateAttack : EnemyStates
     {
         if (!_controller.CheckForNearPlayer())
             _controller.SwitchState(_controller.FindState(StateTypeEnemy.Idle));
-
-
     }
 
     public override void OnExit()
@@ -63,7 +60,7 @@ public class EnemyStateAttack : EnemyStates
                 break;
 
             case EnemyAttackType.ThrowObject:
-                _controller.Shoot.ThrowObject(false);
+                _controller.Shoot.StopThrowObject();
                 break;
         }
     }

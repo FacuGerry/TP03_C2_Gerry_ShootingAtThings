@@ -3,19 +3,23 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody), typeof(EnemyShoot), typeof(EnemyHealthSystem))]
 
-public class NpcController : MonoBehaviour
+public class NpcController : MonoBehaviour, IPooleable
 {
     [SerializeField] private EnemyDataSO _data;
     [SerializeField] private Animator _anim;
     [SerializeField] private GameObject _player; // this should be received from a SO of the game settings
+    public GameObject Player => _player;
+    public float ThrowingHeight { get; private set; } = 5f;
+    public float ThrowingDuration { get; private set; } = 5f;
 
     public EnemyAttackType AttackType => _data.attackType;
     public EnemyClasses EnemyClass => _data.enemyClass;
     public bool CanMove => _data.canMove;
     public bool IsAlive { get; private set; } = true;
+    public bool IsActive { get; set; }
 
     public EnemyShoot Shoot { get; private set; }
-    public EnemyHealthSystem _healthSystem;
+    private EnemyHealthSystem _healthSystem;
 
     private List<EnemyStates> _states = new();
     private EnemyStates _currentState;
@@ -44,6 +48,18 @@ public class NpcController : MonoBehaviour
     private void OnDisable()
     {
         _healthSystem.OnEnemyDie -= OnEnemyDie_ChangeState;
+    }
+
+    public void Activate()
+    {
+        IsActive = true;
+        gameObject.SetActive(IsActive);
+    }
+
+    public void DeActivate()
+    {
+        IsActive = false;
+        gameObject.SetActive(IsActive);
     }
 
     private void SetStatesForFSM()

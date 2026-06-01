@@ -12,7 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf08e4b139f03d7419d9432a7ffc5f8a, type: 3}
   m_Name: AK47
   m_EditorClassIdentifier: Assembly-CSharp::WeaponDataSO
-  prefab: {fileID: 0}
-  shootingDistance: 0
-  shootingDamage: 0
-  shootingSpeed: 0
+  prefab: {fileID: 742821998072145001, guid: f3df1fb2d571bdb4a8bf42cbebd9762f, type: 3}
+  controller:
+  - goal: 2
+    target: {fileID: 3259658997418163155, guid: ad5916f8b38dba340b9a35e6dfca6342, type: 3}
+    weight: 1
+  - goal: 3
+    target: {fileID: 3318579011813020585, guid: b37e9a93ed73f1647916cd9db45313c1, type: 3}
+    weight: 1
+  shootingDistance: 50
+  shootingDamage: 10
+  shootingSpeed: 0.15

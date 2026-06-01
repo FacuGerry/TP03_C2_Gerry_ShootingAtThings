@@ -1,11 +1,12 @@
 using UnityEngine;
 
-[RequireComponent (typeof(Animator))]
+[RequireComponent(typeof(Animator))]
 
 public class WeaponIkFollower : MonoBehaviour
 {
-    [SerializeField] private CustomIkController[] _ikController;
+    [SerializeField] private WeaponDataSO[] _data;
     private Animator _anim;
+    private int _index = 0;
 
     private void Awake()
     {
@@ -19,16 +20,16 @@ public class WeaponIkFollower : MonoBehaviour
 
     private void AnimateIK()
     {
-        if (_anim)
+        foreach (CustomIkController ik in _data[_index].controller)
         {
-            foreach (CustomIkController ik in _ikController)
-            {
-                _anim.SetIKPositionWeight(ik.goal, ik.weight);
-                _anim.SetIKRotationWeight(ik.goal, ik.weight);
+            _anim.SetIKPositionWeight(ik.goal, ik.weight);
+            _anim.SetIKRotationWeight(ik.goal, ik.weight);
 
-                _anim.SetIKPosition(ik.goal, ik.target.position);
-                _anim.SetIKRotation(ik.goal, ik.target.rotation);
-            }
+            _anim.SetIKPosition(ik.goal, ik.target.position);
+            _anim.SetIKRotation(ik.goal, ik.target.rotation);
         }
     }
+
+    public void ChangeIndex(bool isAdding) => _index += isAdding ? 1 : -1;
+    public void ChangeIndexByNumber(int num) => _index = num;
 }

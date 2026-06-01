@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf08e4b139f03d7419d9432a7ffc5f8a, type: 3}
+  m_Name: Pistol
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponDataSO
+  prefab: {fileID: 742821998072145001, guid: 2ad3ef9f774ce044a9a0d9a1a2b37ca6, type: 3}
+  controller:
+  - goal: 2
+    target: {fileID: 2019137710008331448, guid: b813f78b4226f474fb4aa508ec51b564, type: 3}
+    weight: 1
+  - goal: 3
+    target: {fileID: 2794283291190566416, guid: c4148173934aa0142ac89254891dd282, type: 3}
+    weight: 1
+  shootingDistance: 35
+  shootingDamage: 35
+  shootingSpeed: 1

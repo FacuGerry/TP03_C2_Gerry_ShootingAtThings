@@ -8,10 +8,12 @@ public class GameBootstrapper : MonoBehaviour
     public MyPoolManager PoolManager { get; private set; }
     public CustomSceneManager CustomSceneManager { get; private set; }
     public SfxManager SfxManager { get; private set; }
+    public ScoreManager ScoreManager { get; private set; }
 
     [Header("References")]
     [SerializeField] private PoolSettingsSO _poolSettings;
     [SerializeField] private SoundDataSO _soundSettings;
+    [SerializeField] private ScoreDataSO _scoreData;
     [SerializeField] private AudioSource _sourceSfx;
     [SerializeField] private AudioSource _sourceUi;
 
@@ -28,6 +30,7 @@ public class GameBootstrapper : MonoBehaviour
         InitializePoolManager();
         InitializeCustomSceneManager();
         InitializeSfxManager();
+        InitializeScoreManager();
     }
 
     private void OnDestroy()
@@ -58,5 +61,13 @@ public class GameBootstrapper : MonoBehaviour
         go.transform.SetParent(transform);
         SfxManager = go.AddComponent<SfxManager>();
         SfxManager.Init(_soundSettings, _sourceSfx, _sourceUi);
+    }
+
+    private void InitializeScoreManager()
+    {
+        GameObject go = new("Score Manager");
+        go.transform.SetParent(transform);
+        ScoreManager = go.AddComponent<ScoreManager>();
+        ScoreManager.Init(_scoreData);
     }
 }

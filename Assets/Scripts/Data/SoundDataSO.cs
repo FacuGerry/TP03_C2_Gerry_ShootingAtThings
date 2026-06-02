@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Audio;
 
-[CreateAssetMenu(fileName = "SoundData", menuName = "GameSettings/SoundData")]
+[CreateAssetMenu(fileName = "SoundData", menuName = "Settings/SoundData")]
 
 public class SoundDataSO : ScriptableObject
 {

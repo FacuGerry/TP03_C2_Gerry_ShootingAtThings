@@ -663,6 +663,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameBootstrapper
   _poolSettings: {fileID: 11400000, guid: 69ac0a241b13bb04885c80173776b28e, type: 2}
   _soundSettings: {fileID: 11400000, guid: f30c0bae871d12e448c564deb766cce7, type: 2}
+  _scoreData: {fileID: 11400000, guid: c5734d3b1ed053947a0d2b75761ed8c4, type: 2}
   _sourceSfx: {fileID: 553876935}
   _sourceUi: {fileID: 1735174932}
 --- !u!4 &583310169

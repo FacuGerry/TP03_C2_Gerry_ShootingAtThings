@@ -20,18 +20,18 @@ public class EnemyHealthSystem : MonoBehaviour, IDamageable
         if (_health <= 0)
         {
             _health = 0;
-
-            if (GameBootstrapper.Instance != null)
-                GameBootstrapper.Instance.SfxManager.OnEnemyDie_PlayClip();
-
             OnEnemyDie?.Invoke();
+
+            if (GameBootstrapper.Instance == null) return;
+            GameBootstrapper.Instance.SfxManager.OnEnemyDie_PlayClip();
+            GameBootstrapper.Instance.ScoreManager.AddScoreForKillingEnemy();
         }
         else
         {
             OnEnemyDamaged?.Invoke();
 
-            if (GameBootstrapper.Instance != null)
-                GameBootstrapper.Instance.SfxManager.OnEnemyDamaged_PlayClip();
+            if (GameBootstrapper.Instance == null) return;
+            GameBootstrapper.Instance.SfxManager.OnEnemyDamaged_PlayClip();
         }
     }
 }

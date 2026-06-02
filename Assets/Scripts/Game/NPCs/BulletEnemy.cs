@@ -43,7 +43,8 @@ public class BulletEnemy : MonoBehaviour, IPooleable
         }
 
 
-        // GameBootstrapper.Instance.SfxManager.OnEnemyThrow_PlayClip();
+        if (GameBootstrapper.Instance != null)
+            GameBootstrapper.Instance.SfxManager.OnEnemyThrow_PlayClip();
 
         _coroutineThrowing = null;
         DeActivate();
@@ -57,6 +58,8 @@ public class BulletEnemy : MonoBehaviour, IPooleable
             _coroutineThrowing = Moving(startPos, endPos, speed, height);
             StartCoroutine(_coroutineThrowing);
         }
+        else
+            DeActivate();
     }
 
     public void Activate()

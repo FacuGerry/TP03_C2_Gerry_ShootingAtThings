@@ -4,6 +4,7 @@ public class PlayerHealthSystem : MonoBehaviour, IDamageable
 {
     [SerializeField] private int _maxLife;
     private int _currentLife;
+    private PlayerController _controller;
 
     private void Start()
     {
@@ -12,13 +13,19 @@ public class PlayerHealthSystem : MonoBehaviour, IDamageable
 
     public void TakeDamage(int damage)
     {
-        // sfx & vfx of player damaged
         _currentLife -= damage;
-        if (_currentLife < 0)
+        if (_currentLife <= 0)
         {
             _currentLife = 0;
-            // sfx & vfx of player die
-            gameObject.SetActive(false);
+            _controller.KillPlayer();
+
+            if (GameBootstrapper.Instance == null) return;
+            GameBootstrapper.Instance.SfxManager.OnPlayerDie_PlayClip();
+        }
+        else
+        {
+            if (GameBootstrapper.Instance == null) return;
+            GameBootstrapper.Instance.SfxManager.OnPlayerDamaged_PlayClip();
         }
     }
 }

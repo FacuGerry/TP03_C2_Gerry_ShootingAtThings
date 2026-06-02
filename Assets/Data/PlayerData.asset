@@ -13,13 +13,10 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: Assembly-CSharp::PlayerDataSO
   prefab: {fileID: 966096072527412314, guid: 6b46802a7f1fb864bbb460f79976b83b, type: 3}
-  movementSpeed: 15
-  jumpForce: 5
+  movementSpeed: 35
+  jumpForce: 12
   cameraFollowSpeed: 50
   rotationSpeedHor: 100
   rotationSpeedVer: 25
   rotationMinVer: -15
   rotationMaxVer: 25
-  shootingDistance: 40
-  shootingDamage: 10
-  shootingSpeed: 0.15

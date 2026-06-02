@@ -4,8 +4,6 @@
 public class PlayerDataSO : ScriptableObject
 {
     public GameObject prefab;
-    public Transform cameraPos;
-    public GameObject weapon;
 
     [Header("Movement")]
     public float movementSpeed;

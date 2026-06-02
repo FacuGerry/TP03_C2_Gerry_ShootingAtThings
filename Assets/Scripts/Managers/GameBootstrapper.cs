@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameBootstrapper : MonoBehaviour
@@ -16,6 +17,15 @@ public class GameBootstrapper : MonoBehaviour
     [SerializeField] private ScoreDataSO _scoreData;
     [SerializeField] private AudioSource _sourceSfx;
     [SerializeField] private AudioSource _sourceUi;
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    private static void TryCreateBeforeAwake()
+    {
+        if (Instance != null) return;
+
+        GameObject prefab = Resources.Load<GameObject>("GameBootstrapper");
+        Instantiate(prefab);
+    }
 
     private void Awake()
     {

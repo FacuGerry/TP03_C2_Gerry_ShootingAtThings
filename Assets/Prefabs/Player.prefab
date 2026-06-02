@@ -49,7 +49,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 966096072527412314}
   serializedVersion: 5
-  m_Mass: 1
+  m_Mass: 2.5
   m_LinearDamping: 5
   m_AngularDamping: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -179,7 +179,7 @@ Transform:
   m_GameObject: {fileID: 5010717921206583124}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.125, z: 0}
+  m_LocalPosition: {x: 0, y: 0.094, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -200,7 +200,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2

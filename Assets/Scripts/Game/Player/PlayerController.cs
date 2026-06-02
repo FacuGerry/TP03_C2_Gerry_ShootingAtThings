@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody), typeof(PlayerShoot))]
@@ -21,14 +20,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform _cameraPos;
     [SerializeField] private Animator _anim;
 
-    public Vector2 MoveInput { get; private set; }
-    public bool IsWalking { get; private set; }
-    public bool WantsCrouch { get; private set; }
-    public bool WantsShoot { get; private set; }
-    public bool WantsJump { get; private set; }
-    public bool CanJump { get; private set; }
-    public bool IsOnFloor { get; private set; }
-    public bool IsCrouching { get; private set; }
+    public Vector2 MoveInput { get; private set; } = Vector2.zero;
+    public bool IsWalking { get; private set; } = false;
+    public bool WantsCrouch { get; private set; } = false;
+    public bool WantsShoot { get; private set; } = false;
+    public bool WantsJump { get; private set; } = false;
+    public bool CanJump { get; private set; } = true;
+    public bool IsCrouching { get; private set; } = false;
     public bool IsAlive => _isAlive;
     public PlayerShoot Shoot { get; private set; }
 
@@ -38,6 +36,8 @@ public class PlayerController : MonoBehaviour
     private float _speedChanger = 1f;
     private bool _isAlive = true;
     private Rigidbody _rb;
+    private float _jumpKey;
+    private bool _wasJumpPressed = false;
 
     private void Awake()
     {
@@ -52,6 +52,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        ChangeCanJump(true);
         _currentState = FindState(StateTypePlayer.Idle);
         _currentState.OnEnter();
     }
@@ -65,15 +66,20 @@ public class PlayerController : MonoBehaviour
             IsWalking = Input.GetAxisRaw(_walk) != 0f;
 
             WantsCrouch = Input.GetAxisRaw(_crouch) != 0f;
-            WantsJump = Input.GetAxisRaw(_jump) != 0f;
-
             WantsShoot = Input.GetAxisRaw(_shoot) != 0f;
 
-            _currentState.OnUpdate();
+            _jumpKey = Input.GetAxisRaw(_jump);
+            if (_jumpKey > 0f && !_wasJumpPressed)
+            {
+                WantsJump = true;
+            }
+            _wasJumpPressed = _jumpKey > 0f;
+
 
             CalculatePlayerSpeed();
             UpdateAnimatorInputs();
         }
+        _currentState.OnUpdate();
     }
 
     private void FixedUpdate()
@@ -131,7 +137,11 @@ public class PlayerController : MonoBehaviour
     public void Jump()
     {
         if (CanJump)
+        {
             _rb.AddForce(Vector3.up * _data.jumpForce, ForceMode.Impulse);
+            WantsJump = false;
+            ChangeCanJump(false);
+        }
     }
 
     public void SwitchState(PlayerStates newState)
@@ -155,5 +165,9 @@ public class PlayerController : MonoBehaviour
 
     public void ChangeCrouching(bool isCrouching) => IsCrouching = isCrouching;
     public void ChangeCanJump(bool canJump) => CanJump = canJump;
-    public void KillPlayer() => _isAlive = false;
+    public void KillPlayer()
+    {
+        _isAlive = false;
+        SwitchState(FindState(StateTypePlayer.Die));
+    }
 }

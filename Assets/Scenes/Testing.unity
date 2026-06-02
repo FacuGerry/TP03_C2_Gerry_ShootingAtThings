@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 250278166}
   - component: {fileID: 250278165}
   - component: {fileID: 250278164}
+  - component: {fileID: 250278168}
   m_Layer: 5
   m_Name: Canvas Score
   m_TagString: Untagged
@@ -221,6 +222,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &250278168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 250278163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f70b41dc2d8bdec48bd67d2384b4f09e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UiScore
+  _textScore: {fileID: 609494488}
 --- !u!1 &265222008
 GameObject:
   m_ObjectHideFlags: 0
@@ -899,12 +913,12 @@ GameObject:
   - component: {fileID: 866634303}
   - component: {fileID: 866634302}
   m_Layer: 0
-  m_Name: Spawner
+  m_Name: Spawn Enemies
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &866634302
 MonoBehaviour:
   m_ObjectHideFlags: 0

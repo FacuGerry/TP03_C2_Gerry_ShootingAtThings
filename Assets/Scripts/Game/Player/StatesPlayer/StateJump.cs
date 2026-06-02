@@ -13,6 +13,7 @@ public class StateJump : PlayerStates
         base.OnEnter();
         _anim.SetInteger(_state, (int)state);
         _controller.Jump();
+        _controller.ChangeCanJump(false);
     }
 
     public override void OnUpdate()

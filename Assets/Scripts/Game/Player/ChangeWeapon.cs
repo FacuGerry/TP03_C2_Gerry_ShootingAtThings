@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ChangeWeapon : MonoBehaviour
@@ -6,8 +7,14 @@ public class ChangeWeapon : MonoBehaviour
     private readonly string _scroll = "Mouse ScrollWheel";
 
     [SerializeField] private WeaponIkFollower _ik;
-    [SerializeField] private List<Weapon> _weapon;
-    private int _index = 0;
+    [SerializeField] private List<GameObject> _weaponsList = new();
+
+    public int Index { get; private set; } = 0;
+
+    private void Awake()
+    {
+        ToggleWeapon();
+    }
 
     private void Update()
     {
@@ -32,25 +39,25 @@ public class ChangeWeapon : MonoBehaviour
 
     private void ChangeIndexByScroll(bool isAdding)
     {
-        _index += isAdding ? 1 : -1;
-        if (_index < 0)
-            _index = _weapon.Count - 1;
+        Index += isAdding ? 1 : -1;
+        if (Index < 0)
+            Index = _weaponsList.Count - 1;
 
-        if (_index > _weapon.Count - 1)
-            _index = 0;
+        if (Index > _weaponsList.Count - 1)
+            Index = 0;
     }
 
-    private void ChangeIndexByNumber(int num) => _index = num;
+    private void ChangeIndexByNumber(int num) => Index = num;
 
     private void ToggleWeapon()
     {
-        _ik.ChangeIndex(_index);
+        _ik.ChangeIndex(Index);
 
-        int index = _index - 1;
+        int index = Index - 1;
         if (index < 0)
-            index = _weapon.Count - 1;
+            index = _weaponsList.Count - 1;
 
-        _weapon[index].gameObject.SetActive(false);
-        _weapon[_index].gameObject.SetActive(true);
+        _weaponsList[index].SetActive(false);
+        _weaponsList[Index].SetActive(true);
     }
 }

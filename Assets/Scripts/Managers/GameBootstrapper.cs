@@ -5,15 +5,15 @@ public class GameBootstrapper : MonoBehaviour
     public static GameBootstrapper Instance;
 
     // Services
-    public MyPoolManager PoolManager {  get; private set; }
+    public MyPoolManager PoolManager { get; private set; }
     public CustomSceneManager CustomSceneManager { get; private set; }
     public SfxManager SfxManager { get; private set; }
 
     [Header("References")]
     [SerializeField] private PoolSettingsSO _poolSettings;
     [SerializeField] private SoundDataSO _soundSettings;
-    //[SerializeField] private AudioSource _sourceSfx;
-    //[SerializeField] private AudioSource _sourceUi;
+    [SerializeField] private AudioSource _sourceSfx;
+    [SerializeField] private AudioSource _sourceUi;
 
     private void Awake()
     {
@@ -27,7 +27,7 @@ public class GameBootstrapper : MonoBehaviour
 
         InitializePoolManager();
         InitializeCustomSceneManager();
-        //InitializeSfxManager();
+        InitializeSfxManager();
     }
 
     private void OnDestroy()
@@ -57,6 +57,6 @@ public class GameBootstrapper : MonoBehaviour
         GameObject go = new("Sfx Manager");
         go.transform.SetParent(transform);
         SfxManager = go.AddComponent<SfxManager>();
-        //SfxManager.Init(_soundSettings, _sourceSfx, _sourceUi);
+        SfxManager.Init(_soundSettings, _sourceSfx, _sourceUi);
     }
 }

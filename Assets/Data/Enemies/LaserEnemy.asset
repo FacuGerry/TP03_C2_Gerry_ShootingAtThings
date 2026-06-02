@@ -16,4 +16,7 @@ MonoBehaviour:
   attackType: 0
   distanceToShoot: 10
   shootingDamage: 10
+  shootingSpeed: 3
   canMove: 0
+  laser: {fileID: 0}
+  throwableObject: {fileID: 0}

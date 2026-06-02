@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bdeec72d80c8e545ad7868322990a9f, type: 3}
   m_Name: GameData
   m_EditorClassIdentifier: Assembly-CSharp::GameDataSO
-  player: {fileID: 966096072527412314, guid: 6b46802a7f1fb864bbb460f79976b83b, type: 3}
+  playerData: {fileID: 11400000, guid: e3402903d28248d47b4c64e2da40be15, type: 2}
+  player: {fileID: 0}

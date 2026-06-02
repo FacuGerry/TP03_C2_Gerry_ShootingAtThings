@@ -11,21 +11,39 @@ public class SfxManager : MonoBehaviour
         _data = soundSettings;
         _sfx = sfx;
         _ui = ui;
+
+        _sfx.transform.SetParent(transform);
+        _ui.transform.SetParent(transform);
     }
 
-    public void OnPlayerShoot_PlayClip() => _sfx.PlayOneShot(_data.playerShootClip);
 
-    public void OnPlayerSecondShoot_PlayClip() => _sfx.PlayOneShot(_data.playerSecondShoot);
+    // PLAYER
 
-    public void OnEnemyShoot_PlayClip() => _sfx.PlayOneShot(_data.enemyShoot);
+    public void OnPlayerShootRifle_PlayClip() => _sfx.PlayOneShot(_data.playerShootClip); // change data
+
+    public void OnPlayerShootPistol_PlayClip() => _sfx.PlayOneShot(_data.playerSecondShoot); // change data
+
+    public void OnPlayerWalk_PlayClip() => _sfx.PlayOneShot(_data.playerDamaged); // change data
 
     public void OnPlayerDamaged_PlayClip() => _sfx.PlayOneShot(_data.playerDamaged);
 
     public void OnPlayerDie_PlayClip() => _sfx.PlayOneShot(_data.playerDie);
 
-    public void OnNpcDamaged_PlayClip() => _sfx.PlayOneShot(_data.enemyDamaged);
+    // ENEMY
 
-    public void OnNpcDie_PlayClip() => _sfx.PlayOneShot(_data.enemyDie);
+    public void OnEnemyAim_PlayClip() => _sfx.PlayOneShot(_data.enemyShoot); // change data
+
+    public void OnEnemyShoot_PlayClip() => _sfx.PlayOneShot(_data.enemyShoot);
+
+    public void OnEnemyShootLaser_PlayClip() => _sfx.PlayOneShot(_data.enemyShoot); // change data
+
+    public void OnEnemyThrow_PlayClip() => _sfx.PlayOneShot(_data.enemyShoot); // change data
+
+    public void OnEnemyDamaged_PlayClip() => _sfx.PlayOneShot(_data.enemyDamaged);
+
+    public void OnEnemyDie_PlayClip() => _sfx.PlayOneShot(_data.enemyDie);
+
+    // UI
 
     public void OnButtonHover_PlayClip() => _ui.PlayOneShot(_data.btnHover);
 

@@ -16,4 +16,7 @@ MonoBehaviour:
   attackType: 2
   distanceToShoot: 15
   shootingDamage: 5
+  shootingSpeed: 1
+  shootingHeight: 5
+  throwingDuration: 5
   canMove: 0

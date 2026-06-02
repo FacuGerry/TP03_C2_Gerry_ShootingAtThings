@@ -3,6 +3,10 @@
 [CreateAssetMenu(fileName = "PlayerData", menuName = "Player/PlayerData")]
 public class PlayerDataSO : ScriptableObject
 {
+    public GameObject prefab;
+    public Transform cameraPos;
+    public GameObject weapon;
+
     [Header("Movement")]
     public float movementSpeed;
     public float jumpForce;
@@ -13,9 +17,4 @@ public class PlayerDataSO : ScriptableObject
     public float rotationSpeedVer;
     public float rotationMinVer;
     public float rotationMaxVer;
-
-    [Header("Shooting (hay que sacar esto, va a las weapons)")]
-    public float shootingDistance;
-    public int shootingDamage;
-    public float shootingSpeed;
 }

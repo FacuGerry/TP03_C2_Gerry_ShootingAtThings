@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody), typeof(PlayerShoot))]
@@ -16,49 +17,37 @@ public class PlayerController : MonoBehaviour
     private readonly string _walk = "Walk";
 
     [SerializeField] private PlayerDataSO _data;
+    [SerializeField] private AnchorsSO _anchors;
+    [SerializeField] private Transform _cameraPos;
     [SerializeField] private Animator _anim;
 
-    private Rigidbody _rb;
-
-    public PlayerShoot Shoot { get; private set; }
-
-    private List<PlayerStates> _states = new();
-    private PlayerStates _currentState;
-
-    private Vector3 _direction = Vector3.zero;
-
-    private float _speedChanger = 1f;
-
-    private bool _isAlive = true;
     public Vector2 MoveInput { get; private set; }
     public bool IsWalking { get; private set; }
     public bool WantsCrouch { get; private set; }
     public bool WantsShoot { get; private set; }
     public bool WantsJump { get; private set; }
-    public bool IsAlive => _isAlive;
-    public bool IsCrouching { get; private set; }
+    public bool CanJump { get; private set; }
     public bool IsOnFloor { get; private set; }
+    public bool IsCrouching { get; private set; }
+    public bool IsAlive => _isAlive;
+    public PlayerShoot Shoot { get; private set; }
+
+    private List<PlayerStates> _states = new();
+    private PlayerStates _currentState;
+    private Vector3 _direction = Vector3.zero;
+    private float _speedChanger = 1f;
+    private bool _isAlive = true;
+    private Rigidbody _rb;
 
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
         Shoot = GetComponent<PlayerShoot>();
 
-        _states.Clear();
+        SetStatesForFSM();
 
-        _states.Add(new StateIdle());
-        _states.Add(new StateWalk());
-        _states.Add(new StateShoot()); // aparte
-        _states.Add(new StateJump());
-        _states.Add(new StateStandUpToCrouch());
-        _states.Add(new StateCrouchToStandUp());
-        _states.Add(new StateCrouchIdle());
-        _states.Add(new StateCrouchMove());
-        _states.Add(new StateCrouchShoot());
-        _states.Add(new StateDie());
-
-        foreach (PlayerStates state in _states)
-            state.Initialize(_anim, _rb, this);
+        _anchors.playerTransform = transform;
+        _anchors.cameraTransform = _cameraPos;
     }
 
     private void Start()
@@ -69,24 +58,52 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        MoveInput = new Vector2(Input.GetAxisRaw(_hor), Input.GetAxisRaw(_ver));
+        if (_isAlive)
+        {
+            MoveInput = new Vector2(Input.GetAxisRaw(_hor), Input.GetAxisRaw(_ver));
 
-        IsWalking = Input.GetAxisRaw(_walk) != 0f;
+            IsWalking = Input.GetAxisRaw(_walk) != 0f;
 
-        WantsCrouch = Input.GetAxisRaw(_crouch) != 0f;
-        WantsJump = Input.GetAxisRaw(_jump) != 0f;
+            WantsCrouch = Input.GetAxisRaw(_crouch) != 0f;
+            WantsJump = Input.GetAxisRaw(_jump) != 0f;
 
-        WantsShoot = Input.GetAxisRaw(_shoot) != 0f;
+            WantsShoot = Input.GetAxisRaw(_shoot) != 0f;
 
-        _currentState.OnUpdate();
+            _currentState.OnUpdate();
 
-        CalculatePlayerSpeed();
-        UpdateAnimatorInputs();
+            CalculatePlayerSpeed();
+            UpdateAnimatorInputs();
+        }
     }
 
     private void FixedUpdate()
     {
         _rb.AddForce(_direction * (_data.movementSpeed * _speedChanger), ForceMode.Force);
+    }
+
+    private void OnDestroy()
+    {
+        _anchors.playerTransform = null;
+        _anchors.cameraTransform = null;
+    }
+
+    private void SetStatesForFSM()
+    {
+        _states.Clear();
+
+        _states.Add(new StateIdle());
+        _states.Add(new StateWalk());
+        _states.Add(new StateShoot()); // aparte con un avatar
+        _states.Add(new StateJump());
+        _states.Add(new StateStandUpToCrouch());
+        _states.Add(new StateCrouchToStandUp());
+        _states.Add(new StateCrouchIdle());
+        _states.Add(new StateCrouchMove());
+        _states.Add(new StateCrouchShoot());
+        _states.Add(new StateDie());
+
+        foreach (PlayerStates state in _states)
+            state.Initialize(_anim, _rb, this);
     }
 
     private void UpdateAnimatorInputs()
@@ -111,7 +128,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void Jump() => _rb.AddForce(Vector3.up * _data.jumpForce, ForceMode.Impulse);
+    public void Jump()
+    {
+        if (CanJump)
+            _rb.AddForce(Vector3.up * _data.jumpForce, ForceMode.Impulse);
+    }
 
     public void SwitchState(PlayerStates newState)
     {
@@ -133,4 +154,6 @@ public class PlayerController : MonoBehaviour
     }
 
     public void ChangeCrouching(bool isCrouching) => IsCrouching = isCrouching;
+    public void ChangeCanJump(bool canJump) => CanJump = canJump;
+    public void KillPlayer() => _isAlive = false;
 }

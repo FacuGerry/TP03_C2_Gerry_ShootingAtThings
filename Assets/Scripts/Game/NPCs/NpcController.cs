@@ -3,29 +3,26 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody), typeof(EnemyShoot), typeof(EnemyHealthSystem))]
 
-public class NpcController : MonoBehaviour, IPooleable
+public class NpcController : MonoBehaviour
 {
     [SerializeField] private EnemyDataSO _data;
     [SerializeField] private Animator _anim;
-    [SerializeField] private GameDataSO _gameData;
-    
-    private GameObject _player;
-    public GameObject Player => _player;
-    public float ThrowingHeight { get; private set; } = 5f;
-    public float ThrowingDuration { get; private set; } = 5f;
 
-    public EnemyAttackType AttackType => _data.attackType;
-    public EnemyClasses EnemyClass => _data.enemyClass;
-    public bool CanMove => _data.canMove;
-    public bool IsAlive { get; private set; } = true;
-    public bool IsActive { get; set; }
+    // PLAYER
+    public Transform Player { get; private set; }
+    public Rigidbody PlayerRb { get; private set; }
 
+    // ENEMY
+    public EnemyDataSO Data { get; private set; }
+    public EnemyAttackType AttackType => Data.attackType;
+    public EnemyClasses EnemyClass => Data.enemyClass;
+    public bool CanMove => Data.canMove;
     public EnemyShoot Shoot { get; private set; }
-    private EnemyHealthSystem _healthSystem;
 
+    private bool _isAlive = true;
+    private EnemyHealthSystem _healthSystem;
     private List<EnemyStates> _states = new();
     private EnemyStates _currentState;
-
     private Rigidbody _rb;
 
     private void Awake()
@@ -33,6 +30,7 @@ public class NpcController : MonoBehaviour, IPooleable
         _rb = GetComponent<Rigidbody>();
         Shoot = GetComponent<EnemyShoot>();
         _healthSystem = GetComponent<EnemyHealthSystem>();
+        Data = _data;
 
         SetStatesForFSM();
     }
@@ -40,11 +38,6 @@ public class NpcController : MonoBehaviour, IPooleable
     private void OnEnable()
     {
         _healthSystem.OnEnemyDie += OnEnemyDie_ChangeState;
-    }
-
-    private void Start()
-    {
-        _player = _gameData.player;
     }
 
     private void Update()
@@ -57,16 +50,10 @@ public class NpcController : MonoBehaviour, IPooleable
         _healthSystem.OnEnemyDie -= OnEnemyDie_ChangeState;
     }
 
-    public void Activate()
+    public void Initialize(Transform player)
     {
-        IsActive = true;
-        gameObject.SetActive(IsActive);
-    }
-
-    public void DeActivate()
-    {
-        IsActive = false;
-        gameObject.SetActive(IsActive);
+        Player = player;
+        PlayerRb = Player.gameObject.GetComponent<Rigidbody>();
     }
 
     private void SetStatesForFSM()
@@ -108,7 +95,7 @@ public class NpcController : MonoBehaviour, IPooleable
         return null;
     }
 
-    public bool CheckForNearPlayer() => Vector3.Distance(transform.position, _player.transform.position) < _data.distanceToShoot;
+    public bool CheckForNearPlayer() => Mathf.Abs(Vector3.Distance(transform.position, Player.transform.position)) < Data.distanceToShoot;
 
-    private void OnEnemyDie_ChangeState() => IsAlive = false;
+    private void OnEnemyDie_ChangeState() => _isAlive = false;
 }

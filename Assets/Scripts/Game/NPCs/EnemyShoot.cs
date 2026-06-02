@@ -1,19 +1,25 @@
 using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(NpcController))]
+
 public class EnemyShoot : MonoBehaviour
 {
-    [SerializeField] private GameObject _laser;
-    [SerializeField] private GameDataSO _gameData;
     [SerializeField] private Transform _shootingPos;
-    [SerializeField] private float _distance;
-    [SerializeField] private int _damage;
-    [SerializeField] private float _waitingTime;
+    [SerializeField] private GameObject _laser;
+
+    private NpcController _controller;
+
     public Transform ShootingPos => _shootingPos;
     private IEnumerator _coroutineAiming = null;
     private IEnumerator _coroutineShooting = null;
     private IEnumerator _coroutineThrowing = null;
     private bool _isShooting = false;
+
+    private void Awake()
+    {
+        _controller = GetComponent<NpcController>();
+    }
 
     private void OnDestroy()
     {
@@ -24,26 +30,27 @@ public class EnemyShoot : MonoBehaviour
     {
         _laser.SetActive(true);
         Debug.Log("Aiming...");
+        GameBootstrapper.Instance.SfxManager.OnEnemyAim_PlayClip();
 
         float clock = 0f;
-        while (clock < _waitingTime)
+        while (clock < _controller.Data.shootingSpeed)
         {
             clock += Time.deltaTime;
-            transform.LookAt(_gameData.player.transform);
+            transform.LookAt(_controller.Player.transform);
             yield return null;
         }
 
-        if (Physics.Raycast(ShootingPos.position, ShootingPos.forward, out RaycastHit ray, _distance))
+        if (Physics.Raycast(ShootingPos.position, ShootingPos.forward, out RaycastHit ray, _controller.Data.distanceToShoot))
         {
             if (ray.collider != null && ray.collider.TryGetComponent(out IDamageable damage))
             {
-                damage.TakeDamage(_damage);
+                damage.TakeDamage(_controller.Data.shootingDamage);
                 Debug.Log("Shot " + ray.collider.gameObject.name, ray.collider.gameObject);
             }
             else
                 Debug.Log("Shot and missed");
 
-            // sfx & vfx of shooting
+            GameBootstrapper.Instance.SfxManager.OnEnemyShootLaser_PlayClip();
         }
 
         _laser.SetActive(false);
@@ -56,65 +63,51 @@ public class EnemyShoot : MonoBehaviour
         Debug.Log("Shooting normally");
         while (_isShooting)
         {
-            if (Physics.Raycast(ShootingPos.position, ShootingPos.forward, out RaycastHit ray, _distance))
+            if (Physics.Raycast(ShootingPos.position, ShootingPos.forward, out RaycastHit ray, _controller.Data.distanceToShoot))
             {
                 if (ray.collider != null && ray.collider.TryGetComponent(out IDamageable damage))
                 {
-                    damage.TakeDamage(_damage);
+                    damage.TakeDamage(_controller.Data.shootingDamage);
                     Debug.Log("Shot " + ray.collider.gameObject.name, ray.collider.gameObject);
                 }
-                // sfx & vfx of shooting
+                GameBootstrapper.Instance.SfxManager.OnEnemyShoot_PlayClip();
             }
+            yield return new WaitForSeconds(_controller.Data.shootingSpeed);
             yield return null;
         }
         _coroutineShooting = null;
         yield return null;
     }
 
-    private IEnumerator Throwing(Transform startPos, float height, float duration, GameObject player)
+    private IEnumerator Throwing(Transform startPos)
     {
-        Debug.Log("Threw something");
-
-        BulletEnemy bullet = GameBootstrapper.Instance.PoolManager.GetInstanceFromPool<BulletEnemy>();
-        GameObject go = bullet.gameObject;
-        go.SetActive(true);
-
-        Vector3 start = startPos.position;
-
-        //CarMovement car = player.GetComponent<CarMovement>();
-        Vector3 playerVelocity = Vector3.zero;
-        playerVelocity.y = 0f;
-
-        Vector3 futurePos = player.transform.position + playerVelocity;
-
-        float time = 0f;
-        while (time < duration)
+        if (GameBootstrapper.Instance == null) yield return null;
+        while (_isShooting)
         {
-            float t = time / duration;
+            Debug.Log("Threw something");
+            BulletEnemy bullet = GameBootstrapper.Instance.PoolManager.GetInstanceFromPool<BulletEnemy>();
+            if (bullet == null) yield return null;
 
-            Vector3 pos = Vector3.Lerp(start, futurePos, t);
+            bullet.transform.position = startPos.position;
 
-            float yOffset = height * t * 4f * (1f - t);
-            pos.y += yOffset;
+            Vector3 playerVelocity = _controller.PlayerRb.linearVelocity;
+            playerVelocity.y = 0f;
+            Vector3 targetFuturePosition = _controller.Player.position + playerVelocity;
 
-            go.transform.position = pos;
+            bullet.Activate();
+            bullet.Move(startPos.position, targetFuturePosition, _controller.Data.throwingDuration, _controller.Data.shootingHeight);
 
-            time += Time.deltaTime;
-            yield return null;
+            yield return new WaitForSeconds(_controller.Data.shootingSpeed);
         }
-
-        go.SetActive(false);
-
-        GameBootstrapper.Instance.SfxManager.OnEnemyShoot_PlayClip();
-
-        _coroutineThrowing = null;
-        yield return null;
     }
 
     public void AimAndShoot(bool isShooting)
     {
         if (_coroutineAiming != null)
         {
+            if (_laser.activeInHierarchy)
+                _laser.SetActive(false);
+
             StopCoroutine(_coroutineAiming);
             _coroutineAiming = null;
         }
@@ -140,20 +133,18 @@ public class EnemyShoot : MonoBehaviour
         }
     }
 
-    public void ThrowObject(Transform startPos, float height, float duration, GameObject player)
+    public void ThrowObject(bool isShooting, Transform startPos)
     {
+        _isShooting = isShooting;
         if (_coroutineThrowing != null)
         {
             StopCoroutine(_coroutineThrowing);
             _coroutineThrowing = null;
         }
-        _coroutineThrowing = Throwing(startPos, height, duration, player);
-        StartCoroutine(_coroutineThrowing);
-    }
-
-    public void StopThrowObject()
-    {
-        StopCoroutine(_coroutineThrowing);
-        _coroutineThrowing = null;
+        if (isShooting)
+        {
+            _coroutineThrowing = Throwing(startPos);
+            StartCoroutine(_coroutineThrowing);
+        }
     }
 }

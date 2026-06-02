@@ -20,14 +20,18 @@ public class EnemyHealthSystem : MonoBehaviour, IDamageable
         if (_health <= 0)
         {
             _health = 0;
-            // sfx & vfx for dead
+
+            if (GameBootstrapper.Instance != null)
+                GameBootstrapper.Instance.SfxManager.OnEnemyDie_PlayClip();
+
             OnEnemyDie?.Invoke();
-            gameObject.SetActive(false);
         }
         else
         {
             OnEnemyDamaged?.Invoke();
-            // sfx & vfx for damaged
+
+            if (GameBootstrapper.Instance != null)
+                GameBootstrapper.Instance.SfxManager.OnEnemyDamaged_PlayClip();
         }
     }
 }

@@ -1,15 +1,24 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+
+[RequireComponent(typeof(ChangeWeapon))]
 
 public class PlayerShoot : MonoBehaviour
 {
-    [SerializeField] private PlayerDataSO _data;
     [SerializeField] private Transform _shootingPos;
+    [SerializeField] private List<WeaponDataSO> _weaponsDataList;
 
+    private ChangeWeapon _changeWeapon;
     private bool _isShooting = false;
     private bool _startedShooting = false;
 
     private IEnumerator _coroutineShoot;
+
+    private void Awake()
+    {
+        _changeWeapon = GetComponent<ChangeWeapon>();
+    }
 
     private void Update()
     {
@@ -34,17 +43,17 @@ public class PlayerShoot : MonoBehaviour
         Debug.Log("Shooting");
         while (_isShooting)
         {
-            if (Physics.Raycast(_shootingPos.position, _shootingPos.forward, out RaycastHit ray, _data.shootingDistance))
+            if (Physics.Raycast(_shootingPos.position, _shootingPos.forward, out RaycastHit ray, _weaponsDataList[_changeWeapon.Index].shootingDistance))
             {
                 if (ray.collider != null && ray.collider.TryGetComponent(out IDamageable damage))
                 {
-                    damage.TakeDamage(_data.shootingDamage);
+                    damage.TakeDamage(_weaponsDataList[_changeWeapon.Index].shootingDamage);
                     Debug.Log("Shot " + ray.collider.gameObject.name, ray.collider.gameObject);
                 }
 
                 // sfx & vfx of shooting
             }
-            yield return new WaitForSeconds(_data.shootingSpeed);
+            yield return new WaitForSeconds(_weaponsDataList[_changeWeapon.Index].shootingSpeed);
         }
         Debug.Log("Stopped shooting");
         _startedShooting = false;

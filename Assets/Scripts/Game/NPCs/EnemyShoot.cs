@@ -84,9 +84,13 @@ public class EnemyShoot : MonoBehaviour
         if (GameBootstrapper.Instance == null) yield return null;
         while (_isShooting)
         {
-            Debug.Log("Threw something");
             BulletEnemy bullet = GameBootstrapper.Instance.PoolManager.GetInstanceFromPool<BulletEnemy>();
-            if (bullet == null) yield return null;
+            if (bullet == null)
+            {
+                yield return null;
+                Debug.LogError("NO MORE BULLETS");
+            }
+            bullet.Activate();
 
             bullet.transform.position = startPos.position;
 
@@ -94,7 +98,6 @@ public class EnemyShoot : MonoBehaviour
             playerVelocity.y = 0f;
             Vector3 targetFuturePosition = _controller.Player.position + playerVelocity;
 
-            bullet.Activate();
             bullet.Move(startPos.position, targetFuturePosition, _controller.Data.throwingDuration, _controller.Data.shootingHeight);
 
             yield return new WaitForSeconds(_controller.Data.shootingSpeed);

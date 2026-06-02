@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.InputSystem.XR;
 
 [RequireComponent(typeof(Collider))]
 
@@ -42,10 +41,10 @@ public class BulletEnemy : MonoBehaviour, IPooleable
             yield return null;
         }
 
-
         if (GameBootstrapper.Instance != null)
             GameBootstrapper.Instance.SfxManager.OnEnemyThrow_PlayClip();
 
+        Debug.Log("Threw something");
         _coroutineThrowing = null;
         DeActivate();
         yield return null;

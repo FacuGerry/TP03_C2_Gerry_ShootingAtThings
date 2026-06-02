@@ -19,9 +19,9 @@ public class SfxManager : MonoBehaviour
 
     // PLAYER
 
-    public void OnPlayerShootRifle_PlayClip() => _sfx.PlayOneShot(_data.playerShootClip); // change data
+    public void OnPlayerShootRifle_PlayClip() => _sfx.PlayOneShot(_data.playerShootRifle); // change data
 
-    public void OnPlayerShootPistol_PlayClip() => _sfx.PlayOneShot(_data.playerSecondShoot); // change data
+    public void OnPlayerShootPistol_PlayClip() => _sfx.PlayOneShot(_data.playerShootPistol); // change data
 
     public void OnPlayerWalk_PlayClip() => _sfx.PlayOneShot(_data.playerDamaged); // change data
 

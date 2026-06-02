@@ -13,13 +13,16 @@ MonoBehaviour:
   m_Name: SoundData
   m_EditorClassIdentifier: Assembly-CSharp::SoundDataSO
   mixer: {fileID: 24100000, guid: 55281b7de48a9764da5948bf491e009b, type: 2}
-  playerShootClip: {fileID: 0}
-  playerSecondShoot: {fileID: 0}
-  playerDamaged: {fileID: 0}
-  playerDie: {fileID: 0}
-  enemyShoot: {fileID: 0}
-  enemyDamaged: {fileID: 0}
-  enemyDie: {fileID: 0}
-  btnHover: {fileID: 0}
-  btnClick: {fileID: 0}
+  playerShootRifle: {fileID: 8300000, guid: 023ea3ddeaa8dd146b7633a0800e5a0e, type: 3}
+  playerShootPistol: {fileID: 8300000, guid: eaae8fe8d600e1f459f34aa5757fa3b8, type: 3}
+  playerDamaged: {fileID: 8300000, guid: 2b21ef916f6943c439b71a7c74568878, type: 3}
+  playerDie: {fileID: 8300000, guid: 8ff2a2d7e79f81c40ac447512f879374, type: 3}
+  enemyAim: {fileID: 8300000, guid: 6cf9c85b5a3b88c468b21b9d21250adf, type: 3}
+  enemyShootLaser: {fileID: 8300000, guid: f1cb5d83282f2904a85f73111d068616, type: 3}
+  enemyShoot: {fileID: 8300000, guid: c458b6714dab015479d507b21fd2cead, type: 3}
+  enemyThrow: {fileID: 8300000, guid: c91fcf414acc0344cb03b13996f1bf3b, type: 3}
+  enemyDamaged: {fileID: 8300000, guid: 8b23b175a78d6b5458322e3a6c9905d0, type: 3}
+  enemyDie: {fileID: 8300000, guid: 5c7b6d4002009e842bd2621585546d19, type: 3}
+  btnHover: {fileID: 8300000, guid: 35cf7766e9e2aa542811e896fde57989, type: 3}
+  btnClick: {fileID: 8300000, guid: c5cb2ac29e89dbf43a9b644caaad45e6, type: 3}
   bckgMusic: {fileID: 0}

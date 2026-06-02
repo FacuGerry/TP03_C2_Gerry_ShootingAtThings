@@ -9,8 +9,8 @@ public class SoundDataSO : ScriptableObject
     public AudioMixer mixer;
 
     [Header("Player clips")]
-    public AudioClip playerShootClip;
-    public AudioClip playerSecondShoot;
+    public AudioClip playerShootRifle;
+    public AudioClip playerShootPistol;
     public AudioClip playerDamaged;
     public AudioClip playerDie;
 

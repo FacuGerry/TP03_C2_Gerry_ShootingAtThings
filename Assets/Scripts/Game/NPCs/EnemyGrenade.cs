@@ -13,12 +13,12 @@ public class EnemyGrenade : MonoBehaviour, IPooleable
 
     private void OnEnable()
     {
-        _hs.OnEnemyDie += OnEnemyDie_DeActivateEnemy;
+        //_hs.OnEnemyDie += OnEnemyDie_DeActivateEnemy;
     }
 
     private void OnDisable()
     {
-        _hs.OnEnemyDie -= OnEnemyDie_DeActivateEnemy;
+        //_hs.OnEnemyDie -= OnEnemyDie_DeActivateEnemy;
     }
 
     public void Activate()

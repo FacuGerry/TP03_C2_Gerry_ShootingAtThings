@@ -8,6 +8,7 @@ public class EnemyHealthSystem : MonoBehaviour, IDamageable
 
     [SerializeField] private int _maxHealth;
     private int _health;
+    private bool _hasDied = false;
 
     private void Start()
     {
@@ -17,14 +18,19 @@ public class EnemyHealthSystem : MonoBehaviour, IDamageable
     public void TakeDamage(int damage)
     {
         _health -= damage;
-        if (_health <= 0)
+        if (_health <= 0 && !_hasDied)
         {
             _health = 0;
+            _hasDied = true;
             OnEnemyDie?.Invoke();
 
             if (GameBootstrapper.Instance == null) return;
             GameBootstrapper.Instance.SfxManager.OnEnemyDie_PlayClip();
             GameBootstrapper.Instance.ScoreManager.AddScoreForKillingEnemy();
+        }
+        else if (_health <= 0 && _hasDied)
+        {
+            _health = 0;
         }
         else
         {

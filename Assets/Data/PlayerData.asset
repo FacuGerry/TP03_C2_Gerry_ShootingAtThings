@@ -17,6 +17,6 @@ MonoBehaviour:
   jumpForce: 12
   cameraFollowSpeed: 50
   rotationSpeedHor: 100
-  rotationSpeedVer: 25
+  rotationSpeedVer: 50
   rotationMinVer: -15
   rotationMaxVer: 25

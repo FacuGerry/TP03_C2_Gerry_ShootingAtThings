@@ -19,7 +19,6 @@ public class NpcController : MonoBehaviour
     public bool CanMove => Data.canMove;
     public EnemyShoot Shoot { get; private set; }
 
-    private bool _isAlive = true;
     private EnemyHealthSystem _healthSystem;
     private List<EnemyStates> _states = new();
     private EnemyStates _currentState;
@@ -67,7 +66,7 @@ public class NpcController : MonoBehaviour
         }
 
         _states.Add(new EnemyStateAttack());
-        // _states.Add(new EnemyStateDie());
+        _states.Add(new EnemyStateDie());
 
         foreach (EnemyStates state in _states)
             state.Initialize(_anim, _rb, this);
@@ -97,5 +96,5 @@ public class NpcController : MonoBehaviour
 
     public bool CheckForNearPlayer() => Mathf.Abs(Vector3.Distance(transform.position, Player.transform.position)) < Data.distanceToShoot;
 
-    private void OnEnemyDie_ChangeState() => _isAlive = false;
+    private void OnEnemyDie_ChangeState() => SwitchState(FindState(StateTypeEnemy.Die));
 }

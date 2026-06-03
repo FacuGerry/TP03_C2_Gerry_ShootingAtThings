@@ -11,6 +11,7 @@ public class EnemyStateIdle : EnemyStates
     public override void OnEnter()
     {
         base.OnEnter();
+        _anim.SetInteger(_state, (int)state);
         if (_controller.CanMove)
             _controller.SwitchState(_controller.FindState(StateTypeEnemy.Roam));
     }

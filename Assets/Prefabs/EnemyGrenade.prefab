@@ -145,7 +145,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NpcController
   _data: {fileID: 11400000, guid: efbf7ab28d54ee74987f2a096bbe01c0, type: 2}
   _anim: {fileID: 5590165898555269723}
-  _gameData: {fileID: 11400000, guid: 3d580c805c8b8344f9dd72927e0403b5, type: 2}
 --- !u!114 &1411520973477089967
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -225,6 +224,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Character_ExoGray
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: ba2e7a14f0d8d2a4291f99a7fc419e09, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 5a37b51872e489349bf6f54e7dff2ba9, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:

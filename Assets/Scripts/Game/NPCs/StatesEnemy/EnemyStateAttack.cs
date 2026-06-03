@@ -11,6 +11,7 @@ public class EnemyStateAttack : EnemyStates
     public override void OnEnter()
     {
         base.OnEnter();
+        _anim.SetInteger(_state, (int)state);
 
         switch (_controller.AttackType)
         {

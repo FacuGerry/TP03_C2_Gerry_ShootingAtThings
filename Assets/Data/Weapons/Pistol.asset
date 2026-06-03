@@ -13,13 +13,6 @@ MonoBehaviour:
   m_Name: Pistol
   m_EditorClassIdentifier: Assembly-CSharp::WeaponDataSO
   prefab: {fileID: 742821998072145001, guid: 2ad3ef9f774ce044a9a0d9a1a2b37ca6, type: 3}
-  controller:
-  - goal: 2
-    target: {fileID: 2019137710008331448, guid: b813f78b4226f474fb4aa508ec51b564, type: 3}
-    weight: 1
-  - goal: 3
-    target: {fileID: 2794283291190566416, guid: c4148173934aa0142ac89254891dd282, type: 3}
-    weight: 1
   shootingDistance: 35
   shootingDamage: 35
   shootingSpeed: 1

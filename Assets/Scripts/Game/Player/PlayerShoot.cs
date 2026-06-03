@@ -51,7 +51,13 @@ public class PlayerShoot : MonoBehaviour
                     Debug.Log("Shot " + ray.collider.gameObject.name, ray.collider.gameObject);
                 }
 
-                // sfx & vfx of shooting
+                if (GameBootstrapper.Instance != null)
+                {
+                    if (_weaponsDataList[_changeWeapon.Index].prefab.name == "AK-47")
+                        GameBootstrapper.Instance.SfxManager.OnPlayerShootRifle_PlayClip();
+                    else if (_weaponsDataList[_changeWeapon.Index].prefab.name == "Pistol")
+                        GameBootstrapper.Instance.SfxManager.OnPlayerShootPistol_PlayClip();
+                }
             }
             yield return new WaitForSeconds(_weaponsDataList[_changeWeapon.Index].shootingSpeed);
         }

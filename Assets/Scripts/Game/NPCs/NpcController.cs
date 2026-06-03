@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
 
 [RequireComponent(typeof(Rigidbody), typeof(EnemyShoot), typeof(EnemyHealthSystem))]
 
@@ -94,7 +95,15 @@ public class NpcController : MonoBehaviour
         return null;
     }
 
-    public bool CheckForNearPlayer() => Mathf.Abs(Vector3.Distance(transform.position, Player.transform.position)) < Data.distanceToShoot;
+    public bool CheckForNearPlayer()
+    {
+        if (Player.gameObject.activeInHierarchy && Mathf.Abs(Vector3.Distance(transform.position, Player.transform.position)) < Data.distanceToShoot)
+            return true;
+
+        return false;
+    }
 
     private void OnEnemyDie_ChangeState() => SwitchState(FindState(StateTypeEnemy.Die));
+
+    public Animator GetAnim() => _anim;
 }

@@ -6,6 +6,11 @@ public class PlayerHealthSystem : MonoBehaviour, IDamageable
     private int _currentLife;
     private PlayerController _controller;
 
+    private void Awake()
+    {
+        _controller = GetComponent<PlayerController>();
+    }
+
     private void Start()
     {
         _currentLife = _maxLife;

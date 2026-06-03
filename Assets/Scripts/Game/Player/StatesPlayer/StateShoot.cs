@@ -23,6 +23,7 @@ public class StateShoot : PlayerStates
 
     public override void OnExit()
     {
+        _anim.speed = 1f;
         _controller.Shoot.ToogleShooting(false);
     }
 }

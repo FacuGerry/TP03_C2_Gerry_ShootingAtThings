@@ -7,11 +7,15 @@ using UnityEngine;
 public class PlayerShoot : MonoBehaviour
 {
     [SerializeField] private Transform _shootingPos;
+    [SerializeField] private GameObject _laser;
+    [SerializeField] private Animator _anim;
     [SerializeField] private List<WeaponDataSO> _weaponsDataList;
+    [SerializeField] private float _animationDuration = 1.167f;
 
     private ChangeWeapon _changeWeapon;
     private bool _isShooting = false;
     private bool _startedShooting = false;
+    private float _fireRate = 1f;
 
     private IEnumerator _coroutineShoot;
 
@@ -41,6 +45,9 @@ public class PlayerShoot : MonoBehaviour
     private IEnumerator Shooting()
     {
         Debug.Log("Shooting");
+        _laser.SetActive(true);
+        CalculateSpeedForAnim();
+
         while (_isShooting)
         {
             if (Physics.Raycast(_shootingPos.position, _shootingPos.forward, out RaycastHit ray, _weaponsDataList[_changeWeapon.Index].shootingDistance))
@@ -60,9 +67,24 @@ public class PlayerShoot : MonoBehaviour
                 }
             }
             yield return new WaitForSeconds(_weaponsDataList[_changeWeapon.Index].shootingSpeed);
+
+            if (_fireRate != _weaponsDataList[_changeWeapon.Index].shootingSpeed) // Check if weapon was changed
+                CalculateSpeedForAnim();
+
+            yield return null;
         }
+
+        _laser.SetActive(false);
         Debug.Log("Stopped shooting");
         _startedShooting = false;
+        yield return null;
+    }
+
+    private void CalculateSpeedForAnim() // set speed for animator shooting anim
+    {
+        _fireRate = _weaponsDataList[_changeWeapon.Index].shootingSpeed;
+        float animSpeed = _animationDuration / _fireRate;
+        _anim.speed = animSpeed;
     }
 
     public void ToogleShooting(bool isShooting) => _isShooting = isShooting;

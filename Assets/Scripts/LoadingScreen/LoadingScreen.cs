@@ -35,7 +35,7 @@ public class LoadingScreen : MonoBehaviour
     {
         if (!_isLoading)
         {
-            AnimatorStateInfo stateInfo = _anim.GetCurrentAnimatorStateInfo(0);
+            AnimatorStateInfo stateInfo = _anim.GetCurrentAnimatorStateInfo(_anim.GetLayerIndex("Base Layer"));
 
             if (stateInfo.normalizedTime >= 1.0f)
             {

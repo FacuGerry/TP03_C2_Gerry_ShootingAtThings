@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class EnemyShoot : MonoBehaviour
 {
+    private static readonly int _state = Animator.StringToHash("State");
+
     [SerializeField] private Transform _shootingPos;
     [SerializeField] private GameObject _laser;
 
@@ -28,32 +30,39 @@ public class EnemyShoot : MonoBehaviour
 
     private IEnumerator AimingAndShooting()
     {
-        _laser.SetActive(true);
-        Debug.Log("Aiming...");
-        GameBootstrapper.Instance.SfxManager.OnEnemyAim_PlayClip();
-
-        float clock = 0f;
-        while (clock < _controller.Data.shootingSpeed)
+        while (_isShooting)
         {
-            clock += Time.deltaTime;
-            transform.LookAt(_controller.Player.transform);
+            _laser.SetActive(true);
+            Debug.Log("Aiming...");
+            GameBootstrapper.Instance.SfxManager.OnEnemyAim_PlayClip();
+
+            _controller.GetAnim().SetInteger(_state, (int)StateTypeEnemy.Aim);
+            float clock = 0f;
+            while (clock < _controller.Data.shootingSpeed / 2)
+            {
+                clock += Time.deltaTime;
+                transform.LookAt(_controller.Player.transform);
+                yield return null;
+            }
+            _controller.GetAnim().SetInteger(_state, (int)StateTypeEnemy.Attack);
+
+            if (Physics.Raycast(ShootingPos.position, ShootingPos.forward, out RaycastHit ray, _controller.Data.distanceToShoot))
+            {
+                if (ray.collider != null && ray.collider.TryGetComponent(out IDamageable damage))
+                {
+                    damage.TakeDamage(_controller.Data.shootingDamage);
+                    Debug.Log("Shot " + ray.collider.gameObject.name, ray.collider.gameObject);
+                }
+                else
+                    Debug.Log("Shot and missed");
+
+                GameBootstrapper.Instance.SfxManager.OnEnemyShootLaser_PlayClip();
+            }
+
+            _laser.SetActive(false);
+            yield return new WaitForSeconds(_controller.Data.shootingSpeed);
             yield return null;
         }
-
-        if (Physics.Raycast(ShootingPos.position, ShootingPos.forward, out RaycastHit ray, _controller.Data.distanceToShoot))
-        {
-            if (ray.collider != null && ray.collider.TryGetComponent(out IDamageable damage))
-            {
-                damage.TakeDamage(_controller.Data.shootingDamage);
-                Debug.Log("Shot " + ray.collider.gameObject.name, ray.collider.gameObject);
-            }
-            else
-                Debug.Log("Shot and missed");
-
-            GameBootstrapper.Instance.SfxManager.OnEnemyShootLaser_PlayClip();
-        }
-
-        _laser.SetActive(false);
         _coroutineAiming = null;
         yield return null;
     }
@@ -106,6 +115,7 @@ public class EnemyShoot : MonoBehaviour
 
     public void AimAndShoot(bool isShooting)
     {
+        _isShooting = isShooting;
         if (_coroutineAiming != null)
         {
             if (_laser.activeInHierarchy)

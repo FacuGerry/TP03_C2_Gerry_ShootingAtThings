@@ -25,6 +25,7 @@ public class BulletEnemy : MonoBehaviour, IPooleable
 
     public IEnumerator Moving(Vector3 startPos, Vector3 endPos, float speed, float height)
     {
+        if (speed == 0f) speed = 1f; // check because speed MUST NOT BE 0
         float time = 0f;
         while (time < speed)
         {
@@ -47,18 +48,15 @@ public class BulletEnemy : MonoBehaviour, IPooleable
         Debug.Log("Threw something");
         _coroutineThrowing = null;
         DeActivate();
-        yield return null;
     }
 
     public void Move(Vector3 startPos, Vector3 endPos, float speed, float height)
     {
-        if (_coroutineThrowing == null)
-        {
-            _coroutineThrowing = Moving(startPos, endPos, speed, height);
-            StartCoroutine(_coroutineThrowing);
-        }
-        else
-            DeActivate();
+        if (_coroutineThrowing != null)
+            StopCoroutine(_coroutineThrowing);
+
+        _coroutineThrowing = Moving(startPos, endPos, speed, height);
+        StartCoroutine(_coroutineThrowing);
     }
 
     public void Activate()
@@ -70,6 +68,13 @@ public class BulletEnemy : MonoBehaviour, IPooleable
     public void DeActivate()
     {
         IsActive = false;
+
+        if (_coroutineThrowing != null)
+        {
+            StopCoroutine(_coroutineThrowing);
+            _coroutineThrowing = null;
+        }
+
         gameObject.SetActive(IsActive);
     }
 }

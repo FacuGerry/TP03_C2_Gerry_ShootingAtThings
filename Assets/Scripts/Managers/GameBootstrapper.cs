@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameBootstrapper : MonoBehaviour
@@ -18,14 +17,18 @@ public class GameBootstrapper : MonoBehaviour
     [SerializeField] private AudioSource _sourceSfx;
     [SerializeField] private AudioSource _sourceUi;
 
+    private static GameObject _prefab = null;
+
+#if UNITY_EDITOR
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void TryCreateBeforeAwake()
     {
         if (Instance != null) return;
 
-        GameObject prefab = Resources.Load<GameObject>("GameBootstrapper");
-        Instantiate(prefab);
+        _prefab = Resources.Load<GameObject>("GameBootstrapper");
+        Instantiate(_prefab);
     }
+#endif
 
     private void Awake()
     {
@@ -47,6 +50,11 @@ public class GameBootstrapper : MonoBehaviour
     {
         if (Instance == this)
             Instance = null;
+
+#if UNITY_EDITOR
+        if (_prefab != null)
+            Resources.UnloadAsset(_prefab);
+#endif
     }
 
     private void InitializePoolManager()

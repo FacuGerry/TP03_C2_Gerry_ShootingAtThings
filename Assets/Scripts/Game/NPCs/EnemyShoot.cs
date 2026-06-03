@@ -90,7 +90,11 @@ public class EnemyShoot : MonoBehaviour
 
     private IEnumerator Throwing(Transform startPos)
     {
-        if (GameBootstrapper.Instance == null) yield return null;
+        if (GameBootstrapper.Instance == null)
+        {
+            Debug.LogError("THERE IS NO BOOTSTRAPPER");
+            yield return null;
+        }
         while (_isShooting)
         {
             BulletEnemy bullet = GameBootstrapper.Instance.PoolManager.GetInstanceFromPool<BulletEnemy>();

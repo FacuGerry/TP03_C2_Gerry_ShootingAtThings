@@ -53,7 +53,10 @@ public class GameBootstrapper : MonoBehaviour
 
 #if UNITY_EDITOR
         if (_prefab != null)
-            Resources.UnloadAsset(_prefab);
+        {
+            _prefab = null;
+            Resources.UnloadUnusedAssets();
+        }
 #endif
     }
 

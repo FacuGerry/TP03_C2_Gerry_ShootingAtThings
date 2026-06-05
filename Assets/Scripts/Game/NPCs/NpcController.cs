@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem.XR;
 
-[RequireComponent(typeof(Rigidbody), typeof(EnemyShoot), typeof(EnemyHealthSystem))]
+[RequireComponent(typeof(Rigidbody), typeof(EnemyShoot))]
 
 public class NpcController : MonoBehaviour
 {
@@ -20,7 +20,7 @@ public class NpcController : MonoBehaviour
     public bool CanMove => Data.canMove;
     public EnemyShoot Shoot { get; private set; }
 
-    private EnemyHealthSystem _healthSystem;
+    private EnemyHealthSystem _hs;
     private List<EnemyStates> _states = new();
     private EnemyStates _currentState;
     private Rigidbody _rb;
@@ -29,7 +29,11 @@ public class NpcController : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody>();
         Shoot = GetComponent<EnemyShoot>();
-        _healthSystem = GetComponent<EnemyHealthSystem>();
+
+        _hs = GetComponent<EnemyHealthSystem>();
+        if (_hs == null)
+            gameObject.AddComponent<EnemyHealthSystem>();
+
         Data = _data;
 
         SetStatesForFSM();
@@ -37,7 +41,8 @@ public class NpcController : MonoBehaviour
 
     private void OnEnable()
     {
-        _healthSystem.OnEnemyDie += OnEnemyDie_ChangeState;
+        if (_hs)
+            _hs.OnEnemyDie += OnEnemyDie_ChangeState;
     }
 
     private void Update()
@@ -47,7 +52,8 @@ public class NpcController : MonoBehaviour
 
     private void OnDisable()
     {
-        _healthSystem.OnEnemyDie -= OnEnemyDie_ChangeState;
+        if (_hs)
+            _hs.OnEnemyDie -= OnEnemyDie_ChangeState;
     }
 
     public void Initialize(Transform player)

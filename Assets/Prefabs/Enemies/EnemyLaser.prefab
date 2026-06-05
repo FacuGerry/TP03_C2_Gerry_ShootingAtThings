@@ -31,6 +31,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1943453073496358311}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5094443471425307993
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1170683682227843800}
+  m_Layer: 0
+  m_Name: WeaponFollow
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1170683682227843800
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5094443471425307993}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8468472610821092696}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5406288229538952959
 GameObject:
   m_ObjectHideFlags: 0
@@ -93,8 +124,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7000106690068720389}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -10, y: 0, z: 10}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -102,7 +133,7 @@ Transform:
   - {fileID: 3442393987223872556}
   - {fileID: 6132054042456652425}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &5221124382416079742
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -149,9 +180,9 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!114 &8927839382124285689
 MonoBehaviour:
@@ -304,6 +335,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6132054042456652425}
     m_Modifications:
+    - target: {fileID: 616320865478466182, guid: f3df1fb2d571bdb4a8bf42cbebd9762f, type: 3}
+      propertyPath: _follow
+      value: 
+      objectReference: {fileID: 1170683682227843800}
     - target: {fileID: 742821998072145001, guid: f3df1fb2d571bdb4a8bf42cbebd9762f, type: 3}
       propertyPath: m_Name
       value: AK-47
@@ -352,8 +387,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 616320865478466182, guid: f3df1fb2d571bdb4a8bf42cbebd9762f, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 4035334077523740835, guid: f3df1fb2d571bdb4a8bf42cbebd9762f, type: 3}
@@ -440,7 +474,10 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: 5a37b51872e489349bf6f54e7dff2ba9, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 366175167995203695, guid: dd0192a8f0db0724f96aa3194f794293, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1170683682227843800}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: dd0192a8f0db0724f96aa3194f794293, type: 3}
       insertIndex: -1
@@ -449,6 +486,11 @@ PrefabInstance:
 --- !u!95 &2447830853954394278 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: dd0192a8f0db0724f96aa3194f794293, type: 3}
+  m_PrefabInstance: {fileID: 8111797223352821047}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8468472610821092696 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 366175167995203695, guid: dd0192a8f0db0724f96aa3194f794293, type: 3}
   m_PrefabInstance: {fileID: 8111797223352821047}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &8581712331527717596 stripped

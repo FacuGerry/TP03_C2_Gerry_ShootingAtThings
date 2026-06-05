@@ -17,7 +17,7 @@ public class StateCrouchToStandUp : PlayerStates
     public override void OnUpdate()
     {
         AnimatorStateInfo info = _anim.GetCurrentAnimatorStateInfo(_anim.GetLayerIndex("Base Layer"));
-        if (info.normalizedTime >= 1f)
+        if (info.IsName("CrouchToStandUp") && info.normalizedTime >= 1f)
         {
             _controller.ChangeCrouching(false);
             _controller.SwitchState(_controller.FindState(StateTypePlayer.Idle));

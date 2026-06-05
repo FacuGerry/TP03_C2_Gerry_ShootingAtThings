@@ -84,7 +84,8 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _rb.AddForce(_direction * (_data.movementSpeed * _speedChanger), ForceMode.Force);
+        if (_isAlive)
+            _rb.AddForce(_direction * (_data.movementSpeed * _speedChanger), ForceMode.Force);
     }
 
     private void OnDestroy()
@@ -168,6 +169,9 @@ public class PlayerController : MonoBehaviour
     public void KillPlayer()
     {
         _isAlive = false;
+        MoveInput = Vector2.zero;
+        _rb.linearVelocity = Vector3.zero;
+        _rb.angularVelocity = Vector3.zero;
         SwitchState(FindState(StateTypePlayer.Die));
     }
 }

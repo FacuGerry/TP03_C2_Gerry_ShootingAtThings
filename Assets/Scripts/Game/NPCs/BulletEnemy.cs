@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class BulletEnemy : MonoBehaviour, IPooleable
 {
+    [SerializeField] private LayerMask _layer;
     [SerializeField] private EnemyDataSO _data;
 
     public bool IsActive { get; set; }
@@ -13,7 +14,7 @@ public class BulletEnemy : MonoBehaviour, IPooleable
 
     private void OnTriggerEnter(Collider coll)
     {
-        if (coll.TryGetComponent(out IDamageable damage))
+        if (_layer == coll.gameObject.layer && coll.TryGetComponent(out IDamageable damage))
             damage.TakeDamage(_data.shootingDamage);
         DeActivate();
     }

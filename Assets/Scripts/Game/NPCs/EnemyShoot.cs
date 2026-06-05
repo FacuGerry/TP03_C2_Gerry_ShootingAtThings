@@ -32,7 +32,8 @@ public class EnemyShoot : MonoBehaviour
     {
         while (_isShooting)
         {
-            _laser.SetActive(true);
+            if (_laser != null)
+                _laser.SetActive(true);
             Debug.Log("Aiming...");
             GameBootstrapper.Instance.SfxManager.OnEnemyAim_PlayClip();
 
@@ -59,7 +60,8 @@ public class EnemyShoot : MonoBehaviour
                 GameBootstrapper.Instance.SfxManager.OnEnemyShootLaser_PlayClip();
             }
 
-            _laser.SetActive(false);
+            if (_laser != null)
+                _laser.SetActive(false);
             yield return new WaitForSeconds(_controller.Data.shootingSpeed);
             yield return null;
         }
@@ -122,7 +124,7 @@ public class EnemyShoot : MonoBehaviour
         _isShooting = isShooting;
         if (_coroutineAiming != null)
         {
-            if (_laser.activeInHierarchy)
+            if (_laser != null && _laser.activeInHierarchy)
                 _laser.SetActive(false);
 
             StopCoroutine(_coroutineAiming);

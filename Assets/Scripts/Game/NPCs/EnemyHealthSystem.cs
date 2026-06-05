@@ -6,8 +6,8 @@ public class EnemyHealthSystem : MonoBehaviour, IDamageable
     public event Action OnEnemyDamaged;
     public event Action OnEnemyDie;
 
-    [SerializeField] private int _maxHealth;
-    private int _health;
+    [SerializeField] private int _maxHealth = 100;
+    private int _health = 0;
     private bool _hasDied = false;
 
     private void Start()

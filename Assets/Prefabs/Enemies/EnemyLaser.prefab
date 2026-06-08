@@ -1,36 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3305968605088755973
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3442393987223872556}
-  m_Layer: 0
-  m_Name: ShootingPos
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3442393987223872556
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3305968605088755973}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.45, z: 0.375}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1943453073496358311}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5094443471425307993
 GameObject:
   m_ObjectHideFlags: 0
@@ -130,7 +99,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8581712331527717596}
-  - {fileID: 3442393987223872556}
   - {fileID: 6132054042456652425}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -209,6 +177,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NpcController
   _data: {fileID: 11400000, guid: 4d97a6e78ad0d45418f4921a6964c8af, type: 2}
+  _waypoints: {fileID: 0}
   _anim: {fileID: 2447830853954394278}
 --- !u!114 &1411520973477089967
 MonoBehaviour:
@@ -222,7 +191,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3a3ec17e986c4b47b0d8b01917549b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyShoot
-  _shootingPos: {fileID: 3442393987223872556}
+  _shootingPos: {fileID: 4865376606828891117}
   _laser: {fileID: 7343544392461084566}
 --- !u!114 &1232818832183573076
 MonoBehaviour:
@@ -395,6 +364,11 @@ PrefabInstance:
       addedObject: {fileID: 1803804833952050169}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f3df1fb2d571bdb4a8bf42cbebd9762f, type: 3}
+--- !u!4 &4865376606828891117 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 18188445716108295, guid: f3df1fb2d571bdb4a8bf42cbebd9762f, type: 3}
+  m_PrefabInstance: {fileID: 4883542971966087146}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &6771596903242229361 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2178721825386117531, guid: f3df1fb2d571bdb4a8bf42cbebd9762f, type: 3}

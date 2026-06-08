@@ -144,6 +144,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NpcController
   _data: {fileID: 11400000, guid: efbf7ab28d54ee74987f2a096bbe01c0, type: 2}
+  _waypoints: {fileID: 0}
   _anim: {fileID: 5590165898555269723}
 --- !u!114 &1411520973477089967
 MonoBehaviour:

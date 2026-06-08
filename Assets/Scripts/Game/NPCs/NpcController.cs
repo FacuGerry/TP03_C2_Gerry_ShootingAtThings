@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 
 [RequireComponent(typeof(Rigidbody), typeof(EnemyShoot))]
 
 public class NpcController : MonoBehaviour
 {
     [SerializeField] private EnemyDataSO _data;
+    [SerializeField] private WaypointsDataSO _waypoints;
     [SerializeField] private Animator _anim;
 
     // PLAYER
@@ -15,10 +16,12 @@ public class NpcController : MonoBehaviour
 
     // ENEMY
     public EnemyDataSO Data { get; private set; }
+    public WaypointsDataSO Waypoints { get; private set; }
     public EnemyAttackType AttackType => Data.attackType;
     public EnemyClasses EnemyClass => Data.enemyClass;
     public bool CanMove => Data.canMove;
     public EnemyShoot Shoot { get; private set; }
+    public NavMeshAgent Agent { get; private set; }
 
     private EnemyHealthSystem _hs;
     private List<EnemyStates> _states = new();
@@ -30,11 +33,19 @@ public class NpcController : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
         Shoot = GetComponent<EnemyShoot>();
 
+        if (CanMove)
+        {
+            Agent = GetComponent<NavMeshAgent>();
+            if (Agent == null)
+                gameObject.AddComponent<NavMeshAgent>();
+        }
+
         _hs = GetComponent<EnemyHealthSystem>();
         if (_hs == null)
             gameObject.AddComponent<EnemyHealthSystem>();
 
         Data = _data;
+        Waypoints = _waypoints;
 
         SetStatesForFSM();
     }

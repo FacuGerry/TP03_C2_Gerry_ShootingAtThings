@@ -17,8 +17,8 @@ public class EnemyStateRoam : EnemyStates
 
     public override void OnUpdate()
     {
-        float distance = Vector3.Distance(_controller.transform.position, _controller.Agent.destination);
-        if (distance < 0.5f)
+        if (!_controller.Agent.pathPending && _controller.Agent.remainingDistance <= _controller.Agent.stoppingDistance &&
+           (!_controller.Agent.hasPath || _controller.Agent.velocity.sqrMagnitude == 0f))
             _controller.Agent.SetDestination(CalculateNewDestination());
 
         if (_controller.CheckForNearPlayerToFollow())

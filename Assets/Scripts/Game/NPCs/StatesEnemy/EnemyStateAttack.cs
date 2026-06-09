@@ -35,10 +35,15 @@ public class EnemyStateAttack : EnemyStates
                 _controller.Shoot.ThrowObject(true, _controller.Shoot.ShootingPos);
                 break;
         }
+
+        if (_controller.CanMove)
+            _controller.Agent.isStopped = true;
     }
 
     public override void OnUpdate()
     {
+        _controller.transform.LookAt(_controller.Player);
+
         if (!_controller.CheckForNearPlayerToAttack())
             _controller.SwitchState(_controller.FindState(StateTypeEnemy.Idle));
     }
@@ -64,5 +69,8 @@ public class EnemyStateAttack : EnemyStates
                 _controller.Shoot.ThrowObject(false, _controller.Shoot.ShootingPos);
                 break;
         }
+
+        if (_controller.CanMove)
+            _controller.Agent.isStopped = false;
     }
 }

@@ -17,7 +17,7 @@ MonoBehaviour:
   distanceToShoot: 10
   distanceToFollow: 20
   shootingDamage: 7
-  shootingSpeed: 1
+  shootingSpeed: 3
   shootingHeight: 0
   throwingDuration: 0
   canMove: 1

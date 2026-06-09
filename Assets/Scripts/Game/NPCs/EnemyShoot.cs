@@ -38,13 +38,9 @@ public class EnemyShoot : MonoBehaviour
             GameBootstrapper.Instance.SfxManager.OnEnemyAim_PlayClip();
 
             _controller.GetAnim().SetInteger(_state, (int)StateTypeEnemy.Aim);
-            float clock = 0f;
-            while (clock < _controller.Data.shootingSpeed / 2)
-            {
-                clock += Time.deltaTime;
-                transform.LookAt(_controller.Player.transform);
-                yield return null;
-            }
+
+            yield return new WaitForSeconds(_controller.Data.shootingSpeed * 0.75f);
+
             _controller.GetAnim().SetInteger(_state, (int)StateTypeEnemy.Attack);
 
             if (Physics.Raycast(ShootingPos.position, ShootingPos.forward, out RaycastHit ray, _controller.Data.distanceToShoot))

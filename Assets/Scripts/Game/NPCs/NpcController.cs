@@ -134,7 +134,12 @@ public class NpcController : MonoBehaviour
         return false;
     }
 
-    private void OnEnemyDie_ChangeState() => SwitchState(FindState(StateTypeEnemy.Die));
+    private void OnEnemyDie_ChangeState()
+    {
+        SwitchState(FindState(StateTypeEnemy.Die));
+        if (CanMove)
+            Agent.isStopped = true;
+    }
 
     public Animator GetAnim() => _anim;
 }

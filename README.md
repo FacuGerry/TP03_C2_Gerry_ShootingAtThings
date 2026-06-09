@@ -24,3 +24,5 @@
 
 ### Itch
 https://facugerry.itch.io/bullet-master
+
+## Game made by: FacuGerry

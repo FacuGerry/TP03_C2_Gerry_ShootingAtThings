@@ -12,36 +12,21 @@ public class EnemyStateFollow : EnemyStates
     {
         base.OnEnter();
         _anim.SetInteger(_state, (int)state);
-
-        switch (_controller.EnemyClass)
-        {
-            case EnemyClasses.None:
-                Debug.LogError("NO CLASS WAS ASSIGNED FOR THIS ENEMY", _controller.gameObject);
-                break;
-
-            case EnemyClasses.Laser:
-                _controller.SwitchState(_controller.FindState(StateTypeEnemy.Idle));
-                break;
-
-            case EnemyClasses.Grenade:
-                _controller.SwitchState(_controller.FindState(StateTypeEnemy.Idle));
-                break;
-
-            case EnemyClasses.Flying:
-
-                break;
-
-            case EnemyClasses.Floor:
-
-                break;
-        }
+        _controller.FollowPlayer.FollowPlayer(_controller);
     }
 
     public override void OnUpdate()
     {
-        // NAVMESH WORK HERE OR IN OnEnter()
-
-        if (_controller.CheckForNearPlayer())
+        if (_controller.CheckForNearPlayerToAttack())
             _controller.SwitchState(_controller.FindState(StateTypeEnemy.Attack));
+
+        if (!_controller.CheckForNearPlayerToFollow())
+            _controller.SwitchState(_controller.FindState(StateTypeEnemy.Roam));
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+        _controller.FollowPlayer.StopFollowing();
     }
 }

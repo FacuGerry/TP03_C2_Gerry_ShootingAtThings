@@ -22,6 +22,7 @@ public class NpcController : MonoBehaviour
     public bool CanMove => Data.canMove;
     public EnemyShoot Shoot { get; private set; }
     public NavMeshAgent Agent { get; private set; }
+    public EnemyFollowPlayer FollowPlayer { get; private set; }
 
     private EnemyHealthSystem _hs;
     private List<EnemyStates> _states = new();
@@ -32,22 +33,12 @@ public class NpcController : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody>();
         Shoot = GetComponent<EnemyShoot>();
-
-        if (CanMove)
-        {
-            Agent = GetComponent<NavMeshAgent>();
-            if (Agent == null)
-                gameObject.AddComponent<NavMeshAgent>();
-        }
+        Data = _data;
+        Waypoints = _waypoints;
 
         _hs = GetComponent<EnemyHealthSystem>();
         if (_hs == null)
             gameObject.AddComponent<EnemyHealthSystem>();
-
-        Data = _data;
-        Waypoints = _waypoints;
-
-        SetStatesForFSM();
     }
 
     private void OnEnable()
@@ -71,6 +62,21 @@ public class NpcController : MonoBehaviour
     {
         Player = player;
         PlayerRb = Player.gameObject.GetComponent<Rigidbody>();
+
+        if (CanMove)
+        {
+            Agent = GetComponent<NavMeshAgent>();
+            if (Agent == null)
+                gameObject.AddComponent<NavMeshAgent>();
+
+            Agent.enabled = true;
+
+            FollowPlayer = GetComponent<EnemyFollowPlayer>();
+            if (FollowPlayer == null)
+                gameObject.AddComponent<EnemyFollowPlayer>();
+        }
+
+        SetStatesForFSM();
     }
 
     private void SetStatesForFSM()
@@ -112,9 +118,17 @@ public class NpcController : MonoBehaviour
         return null;
     }
 
-    public bool CheckForNearPlayer()
+    public bool CheckForNearPlayerToAttack()
     {
         if (Player.gameObject.activeInHierarchy && Mathf.Abs(Vector3.Distance(transform.position, Player.transform.position)) < Data.distanceToShoot)
+            return true;
+
+        return false;
+    }
+
+    public bool CheckForNearPlayerToFollow()
+    {
+        if (Player.gameObject.activeInHierarchy && Mathf.Abs(Vector3.Distance(transform.position, Player.transform.position)) < Data.distanceToFollow)
             return true;
 
         return false;

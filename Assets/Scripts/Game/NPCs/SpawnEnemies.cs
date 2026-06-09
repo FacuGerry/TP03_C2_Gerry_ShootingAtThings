@@ -15,6 +15,8 @@ public class SpawnEnemies : MonoBehaviour
         _mng = GameBootstrapper.Instance.PoolManager;
         SpawnEnemy<EnemyLaser>();
         SpawnEnemy<EnemyGrenade>();
+        SpawnEnemy<EnemyFloor>();
+        SpawnEnemy<EnemyFlying>();
     }
 
     private void SpawnEnemy<T>() where T : MonoBehaviour, IPooleable

@@ -52,19 +52,19 @@ public class PlayerShoot : MonoBehaviour
         {
             if (Physics.Raycast(_shootingPos.position, _shootingPos.forward, out RaycastHit ray, _weaponsDataList[_changeWeapon.Index].shootingDistance))
             {
-                if (ray.collider != null && ray.collider.TryGetComponent(out IDamageable damage))
+                if (ray.collider && ray.collider.TryGetComponent(out IDamageable damage))
                 {
                     damage.TakeDamage(_weaponsDataList[_changeWeapon.Index].shootingDamage);
                     Debug.Log("Shot " + ray.collider.gameObject.name, ray.collider.gameObject);
                 }
+            }
 
-                if (GameBootstrapper.Instance != null)
-                {
-                    if (_weaponsDataList[_changeWeapon.Index].prefab.name == "AK-47")
-                        GameBootstrapper.Instance.SfxManager.OnPlayerShootRifle_PlayClip();
-                    else if (_weaponsDataList[_changeWeapon.Index].prefab.name == "Pistol")
-                        GameBootstrapper.Instance.SfxManager.OnPlayerShootPistol_PlayClip();
-                }
+            if (GameBootstrapper.Instance)
+            {
+                if (_weaponsDataList[_changeWeapon.Index].prefab.name == "AK-47")
+                    GameBootstrapper.Instance.SfxManager.OnPlayerShootRifle_PlayClip();
+                else if (_weaponsDataList[_changeWeapon.Index].prefab.name == "Pistol")
+                    GameBootstrapper.Instance.SfxManager.OnPlayerShootPistol_PlayClip();
             }
             yield return new WaitForSeconds(_weaponsDataList[_changeWeapon.Index].shootingSpeed);
 

@@ -13,9 +13,13 @@ MonoBehaviour:
   m_Name: PoolSettings
   m_EditorClassIdentifier: Assembly-CSharp::PoolSettingsSO
   poolSettings:
-  - prefab: {fileID: 7896419134810748527, guid: 46fe7b5dcb74fef4890bef95d96eb72e, type: 3}
-    quantity: 3
-  - prefab: {fileID: 7896419134810748527, guid: 6a5ff88fac62de84cb7655c5b6319a9a, type: 3}
-    quantity: 3
   - prefab: {fileID: 5891131558243760921, guid: a2aa9996bd603764181c0e35dfab5252, type: 3}
-    quantity: 20
+    quantity: 50
+  - prefab: {fileID: 7896419134810748527, guid: 46fe7b5dcb74fef4890bef95d96eb72e, type: 3}
+    quantity: 10
+  - prefab: {fileID: 7896419134810748527, guid: 6a5ff88fac62de84cb7655c5b6319a9a, type: 3}
+    quantity: 10
+  - prefab: {fileID: 3535747004499092235, guid: 4f6c38993c2c8454cbbac1d3aac665c5, type: 3}
+    quantity: 10
+  - prefab: {fileID: 6500797796451784391, guid: 0589548715776514789369ecb0791695, type: 3}
+    quantity: 10

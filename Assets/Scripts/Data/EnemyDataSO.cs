@@ -7,6 +7,7 @@ public class EnemyDataSO : ScriptableObject
     public EnemyClasses enemyClass;
     public EnemyAttackType attackType;
     public float distanceToShoot;
+    public float distanceToFollow;
     public int shootingDamage;
     public int shootingSpeed;
     public int shootingHeight;

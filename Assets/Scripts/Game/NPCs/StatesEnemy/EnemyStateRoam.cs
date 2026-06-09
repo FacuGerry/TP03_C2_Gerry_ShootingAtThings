@@ -21,31 +21,15 @@ public class EnemyStateRoam : EnemyStates
         if (distance < 0.5f)
             _controller.Agent.SetDestination(CalculateNewDestination());
 
-        if (_controller.CheckForNearPlayer())
-        {
-            _controller.Agent.isStopped = true;
+        if (_controller.CheckForNearPlayerToFollow())
             _controller.SwitchState(_controller.FindState(StateTypeEnemy.Follow));
-        }
     }
 
     private Vector3 CalculateNewDestination()
     {
         float randomX = Random.Range(_controller.Waypoints.minX, _controller.Waypoints.maxX);
         float randomZ = Random.Range(_controller.Waypoints.minZ, _controller.Waypoints.maxZ);
-        float positionY = 0f;
-
-        switch (_controller.EnemyClass)
-        {
-            case EnemyClasses.Flying:
-                positionY = _controller.Waypoints.heightForFlyingEnemies;
-                break;
-
-            case EnemyClasses.Floor:
-                positionY = 0f;
-                break;
-        }
-
-        Vector3 destination = new(randomX, positionY, randomZ);
+        Vector3 destination = new(randomX, _controller.transform.position.y, randomZ);
 
         return destination;
     }

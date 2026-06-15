@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,7 +10,6 @@ public class LoadingScreen : MonoBehaviour
     [SerializeField] private CanvasGroup _canvasSplashScreen;
     private CanvasGroup _canvasLoading;
     private IEnumerator _coroutineLoading;
-    private Action currentCallback;
 
     private bool _isLoading = false;
 
@@ -24,11 +22,10 @@ public class LoadingScreen : MonoBehaviour
 
     private void Start()
     {
-        _canvasLoading.alpha = 0f;
-        _canvasLoading.interactable = false;
-        _canvasLoading.blocksRaycasts = false;
+        ToogleCanvas(false, _canvasLoading);
 
-        _sceneMng = GameBootstrapper.Instance.CustomSceneManager;
+        if (GameBootstrapper.Instance)
+            _sceneMng = GameBootstrapper.Instance.CustomSceneManager;
     }
 
     private void Update()
@@ -40,7 +37,7 @@ public class LoadingScreen : MonoBehaviour
             if (stateInfo.normalizedTime >= 1.0f)
             {
                 _isLoading = true;
-                StartLoadingBar(StartLoadingNewScene);
+                StartLoadingBar();
             }
         }
     }
@@ -52,17 +49,12 @@ public class LoadingScreen : MonoBehaviour
 
     private IEnumerator Loading()
     {
-        _canvasSplashScreen.alpha = 0f;
-        _canvasSplashScreen.interactable = false;
-        _canvasSplashScreen.blocksRaycasts = false;
+        ToogleCanvas(false, _canvasSplashScreen);
+        ToogleCanvas(true, _canvasLoading);
 
-        _canvasLoading.alpha = 1f;
-        _canvasLoading.interactable = true;
-        _canvasLoading.blocksRaycasts = true;
+        StartLoadingNewScene();
 
-        currentCallback?.Invoke();
         float clock = 0f;
-
         while (clock < _loadingTime)
         {
             clock += Time.deltaTime;
@@ -78,9 +70,7 @@ public class LoadingScreen : MonoBehaviour
 
         yield return new WaitForSeconds(0.5f);
 
-        _canvasLoading.alpha = 0f;
-        _canvasLoading.interactable = false;
-        _canvasLoading.blocksRaycasts = false;
+        ToogleCanvas(false, _canvasLoading);
 
         _sceneMng.ActivateLoadedScene();
 
@@ -88,19 +78,23 @@ public class LoadingScreen : MonoBehaviour
         yield return null;
     }
 
-    public void StartLoadingBar(Action callback)
+    private void ToogleCanvas(bool isOn, CanvasGroup canvas)
     {
+        canvas.alpha = isOn ? 1f : 0f;
+        canvas.interactable = isOn;
+        canvas.blocksRaycasts = isOn;
+    }
+
+    public void StartLoadingBar()
+    {
+        if (!_sceneMng) return;
+
         if (_coroutineLoading == null)
         {
-            currentCallback = callback;
             _coroutineLoading = Loading();
             StartCoroutine(_coroutineLoading);
         }
     }
 
-    private void StartLoadingNewScene()
-    {
-        if (_sceneMng != null)
-            _sceneMng.GoToTesting();
-    }
+    private void StartLoadingNewScene() => _sceneMng.GoToGameplay();
 }

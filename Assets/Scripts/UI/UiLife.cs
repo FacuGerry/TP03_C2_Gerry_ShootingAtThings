@@ -19,7 +19,7 @@ public class UiLife : MonoBehaviour
         _hs.OnLifeUpdated += OnLifeUpdated_UpdateText;
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         if (!_hs) return;
         _hs.OnLifeUpdated -= OnLifeUpdated_UpdateText;

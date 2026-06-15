@@ -4,6 +4,7 @@ using UnityEngine;
 public class ScoreManager : MonoBehaviour
 {
     public event Action<int> OnScoreUpdated;
+    public event Action OnMaxScoreGotten;
 
     private ScoreDataSO _scoreData;
     private int _score = 0;
@@ -18,7 +19,10 @@ public class ScoreManager : MonoBehaviour
     {
         _score += _scoreData.scoreForKillingEnemy;
         if (_score >= _scoreData.maxScore)
+        {
             _score = _scoreData.maxScore;
+            OnMaxScoreGotten?.Invoke();
+        }
 
         OnScoreUpdated?.Invoke(_score);
     }

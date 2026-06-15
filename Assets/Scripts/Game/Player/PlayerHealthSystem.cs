@@ -4,6 +4,7 @@ using UnityEngine;
 public class PlayerHealthSystem : MonoBehaviour, IDamageable
 {
     public event Action<int> OnLifeUpdated;
+    public event Action OnPlayerDie;
 
     [SerializeField] private int _maxLife;
     private int _currentLife;
@@ -26,6 +27,7 @@ public class PlayerHealthSystem : MonoBehaviour, IDamageable
         if (_currentLife <= 0)
         {
             _currentLife = 0;
+            OnPlayerDie?.Invoke();
             _controller.KillPlayer();
 
             if (GameBootstrapper.Instance == null) return;

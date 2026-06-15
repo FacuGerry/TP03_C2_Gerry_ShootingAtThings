@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c2ae5d7eba1646478f7dc2323f33b60, type: 3}
   m_Name: ScoreData
   m_EditorClassIdentifier: Assembly-CSharp::ScoreDataSO
-  maxScore: 99999999
+  maxScore: 1050
   scoreForKillingEnemy: 150

@@ -46,6 +46,8 @@ public class PlayerShoot : MonoBehaviour
         Debug.Log("Shooting");
         CalculateSpeedForAnim();
 
+        if (!GameBootstrapper.Instance) yield return null;
+
         while (_isShooting)
         {
             if (Physics.Raycast(_shootingPos.position, _shootingPos.forward, out RaycastHit ray, _weaponsDataList[_changeWeapon.Index].shootingDistance))
@@ -57,17 +59,25 @@ public class PlayerShoot : MonoBehaviour
                 }
             }
 
-            if (GameBootstrapper.Instance)
-            {
-                if (_weaponsDataList[_changeWeapon.Index].prefab.name == "AK-47")
-                    GameBootstrapper.Instance.SfxManager.OnPlayerShootRifle_PlayClip();
-                else if (_weaponsDataList[_changeWeapon.Index].prefab.name == "Pistol")
-                    GameBootstrapper.Instance.SfxManager.OnPlayerShootPistol_PlayClip();
-            }
+            if (_weaponsDataList[_changeWeapon.Index].prefab.name == "AK-47")
+                GameBootstrapper.Instance.SfxManager.OnPlayerShootRifle_PlayClip();
+            else if (_weaponsDataList[_changeWeapon.Index].prefab.name == "Pistol")
+                GameBootstrapper.Instance.SfxManager.OnPlayerShootPistol_PlayClip();
+
+            ParticleShoot particle = GameBootstrapper.Instance.PoolManager.GetInstanceFromPool<ParticleShoot>();
+            particle.Activate();
+            particle.transform.position = _shootingPos.position;
+            particle.ParticleSystem.Play();
+
             yield return new WaitForSeconds(_weaponsDataList[_changeWeapon.Index].shootingSpeed);
 
             if (_fireRate != _weaponsDataList[_changeWeapon.Index].shootingSpeed) // Check if weapon was changed
                 CalculateSpeedForAnim();
+
+            if (!particle.ParticleSystem.isStopped)
+                particle.ParticleSystem.Stop();
+
+            particle.DeActivate();
 
             yield return null;
         }

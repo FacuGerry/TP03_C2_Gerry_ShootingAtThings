@@ -96,5 +96,5 @@ public class LoadingScreen : MonoBehaviour
         }
     }
 
-    private void StartLoadingNewScene() => _sceneMng.GoToGameplay();
+    private void StartLoadingNewScene() => _sceneMng.GoToMainMenu();
 }

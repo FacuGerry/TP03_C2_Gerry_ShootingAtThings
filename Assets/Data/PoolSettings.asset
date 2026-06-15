@@ -23,3 +23,5 @@ MonoBehaviour:
     quantity: 10
   - prefab: {fileID: 6500797796451784391, guid: 0589548715776514789369ecb0791695, type: 3}
     quantity: 10
+  - prefab: {fileID: 7728475197697566643, guid: 39f852c28f9c3fd45a427c24f3564ba7, type: 3}
+    quantity: 15

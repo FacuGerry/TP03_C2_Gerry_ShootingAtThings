@@ -7,7 +7,6 @@ using UnityEngine;
 public class PlayerShoot : MonoBehaviour
 {
     [SerializeField] private Transform _shootingPos;
-    [SerializeField] private GameObject _laser;
     [SerializeField] private Animator _anim;
     [SerializeField] private List<WeaponDataSO> _weaponsDataList;
     [SerializeField] private float _animationDuration = 1.167f;
@@ -45,7 +44,6 @@ public class PlayerShoot : MonoBehaviour
     private IEnumerator Shooting()
     {
         Debug.Log("Shooting");
-        _laser.SetActive(true);
         CalculateSpeedForAnim();
 
         while (_isShooting)
@@ -74,7 +72,6 @@ public class PlayerShoot : MonoBehaviour
             yield return null;
         }
 
-        _laser.SetActive(false);
         Debug.Log("Stopped shooting");
         _startedShooting = false;
         yield return null;

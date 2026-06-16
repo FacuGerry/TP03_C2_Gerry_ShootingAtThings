@@ -19,22 +19,25 @@ public class ChangeWeapon : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetAxisRaw(_scroll) != 0f)
+        if (!GameBootstrapper.Instance.PauseManager.IsPaused)
         {
-            ChangeIndexByScroll(Input.GetAxisRaw(_scroll) > 0f);
-            ToggleWeapon();
-        }
+            if (Input.GetAxisRaw(_scroll) != 0f)
+            {
+                ChangeIndexByScroll(Input.GetAxisRaw(_scroll) > 0f);
+                ToggleWeapon();
+            }
 
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            ChangeIndexByNumber(0);
-            ToggleWeapon();
-        }
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                ChangeIndexByNumber(0);
+                ToggleWeapon();
+            }
 
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            ChangeIndexByNumber(1);
-            ToggleWeapon();
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                ChangeIndexByNumber(1);
+                ToggleWeapon();
+            }
         }
     }
 

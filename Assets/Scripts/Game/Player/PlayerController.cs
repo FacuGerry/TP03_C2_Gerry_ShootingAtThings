@@ -59,7 +59,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (_isAlive)
+        if (_isAlive && !GameBootstrapper.Instance.PauseManager.IsPaused)
         {
             MoveInput = new Vector2(Input.GetAxisRaw(_hor), Input.GetAxisRaw(_ver));
 

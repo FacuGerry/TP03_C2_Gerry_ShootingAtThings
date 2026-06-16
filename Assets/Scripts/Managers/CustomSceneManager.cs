@@ -40,4 +40,6 @@ public class CustomSceneManager : MonoBehaviour
         if (_asyncLoadScene != null)
             _asyncLoadScene.allowSceneActivation = true;
     }
+
+    public bool IsInGameplay() => SceneManager.GetActiveScene().name == _sceneGameplay;
 }

@@ -9,6 +9,7 @@ public class GameBootstrapper : MonoBehaviour
     public CustomSceneManager CustomSceneManager { get; private set; }
     public SfxManager SfxManager { get; private set; }
     public ScoreManager ScoreManager { get; private set; }
+    public PauseManager PauseManager { get; private set; }
 
     [Header("References")]
     [SerializeField] private PoolSettingsSO _poolSettings;
@@ -44,6 +45,7 @@ public class GameBootstrapper : MonoBehaviour
         InitializeCustomSceneManager();
         InitializeSfxManager();
         InitializeScoreManager();
+        InitializePauseManager();
     }
 
     private void OnDestroy()
@@ -90,5 +92,13 @@ public class GameBootstrapper : MonoBehaviour
         go.transform.SetParent(transform);
         ScoreManager = go.AddComponent<ScoreManager>();
         ScoreManager.Init(_scoreData);
+    }
+
+    private void InitializePauseManager()
+    {
+        GameObject go = new("Pause Manager");
+        go.transform.SetParent(transform);
+        PauseManager = go.AddComponent<PauseManager>();
+        PauseManager.Init();
     }
 }

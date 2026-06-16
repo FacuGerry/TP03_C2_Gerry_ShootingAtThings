@@ -49,7 +49,8 @@ public class NpcController : MonoBehaviour
 
     private void Update()
     {
-        _currentState.OnUpdate();
+        if (!GameBootstrapper.Instance.PauseManager.IsPaused)
+            _currentState.OnUpdate();
     }
 
     private void OnDisable()

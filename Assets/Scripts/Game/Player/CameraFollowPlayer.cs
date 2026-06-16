@@ -24,16 +24,19 @@ public class CameraFollowPlayer : MonoBehaviour
 
     private void Update()
     {
-        CalculateRotation();
+        if (!GameBootstrapper.Instance.PauseManager.IsPaused)
+        {
+            CalculateRotation();
 
-        if (_camera)
-            RotateCamera();
+            if (_camera)
+                RotateCamera();
 
-        if (_player)
-            RotatePlayer();
+            if (_player)
+                RotatePlayer();
 
-        if (_weapon)
-            RotateWeapon();
+            if (_weapon)
+                RotateWeapon();
+        }
     }
 
     private void LateUpdate()

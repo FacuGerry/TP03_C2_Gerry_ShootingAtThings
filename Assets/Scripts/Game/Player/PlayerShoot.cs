@@ -25,7 +25,7 @@ public class PlayerShoot : MonoBehaviour
 
     private void Update()
     {
-        if (_isShooting && !_startedShooting)
+        if (_isShooting && !_startedShooting && !GameBootstrapper.Instance.PauseManager.IsPaused)
         {
             _startedShooting = true;
             if (_coroutineShoot != null)

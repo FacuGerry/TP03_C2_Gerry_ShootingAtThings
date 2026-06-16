@@ -21,6 +21,7 @@
 > - https://assetstore.unity.com/packages/2d/textures-materials/nature/terrain-textures-free-271990
 > - https://assetstore.unity.com/packages/vfx/particles/hit-effects-free-284613
 > - https://assetstore.unity.com/packages/2d/textures-materials/sky/fantasy-skybox-free-18353
+> - https://assetstore.unity.com/packages/audio/music/free-casual-music-pack-242591
 
 ### Itch
 https://facugerry.itch.io/bullet-master

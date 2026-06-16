@@ -27,6 +27,8 @@ public class CustomSceneManager : MonoBehaviour
         _asyncLoadScene.allowSceneActivation = false;
     }
 
+    public void GoToMainMenuNoLoading() => SceneManager.LoadScene(_sceneMainMenu);
+
     public void GoToGameplay()
     {
         _asyncLoadScene = SceneManager.LoadSceneAsync(_sceneGameplay);
@@ -39,6 +41,8 @@ public class CustomSceneManager : MonoBehaviour
     {
         if (_asyncLoadScene != null)
             _asyncLoadScene.allowSceneActivation = true;
+
+        Cursor.lockState = IsInGameplay() ? CursorLockMode.Locked : CursorLockMode.None;
     }
 
     public bool IsInGameplay() => SceneManager.GetActiveScene().name == _sceneGameplay;

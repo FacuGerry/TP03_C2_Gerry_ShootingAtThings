@@ -6,12 +6,13 @@ public class PauseManager : MonoBehaviour
     public event Action<bool> OnPauseChanged;
 
     private bool _isPaused = false;
+    private bool _canPause = true;
     public bool IsPaused => _isPaused;
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Return))
-            if (GameBootstrapper.Instance.CustomSceneManager.IsInGameplay())
+            if (GameBootstrapper.Instance.CustomSceneManager.IsInGameplay() && _canPause)
                 ChangePause(!_isPaused);
     }
 
@@ -23,5 +24,14 @@ public class PauseManager : MonoBehaviour
         OnPauseChanged?.Invoke(_isPaused);
         Time.timeScale = _isPaused ? 0.0f : 1.0f;
         Cursor.lockState = _isPaused ? CursorLockMode.None : CursorLockMode.Locked;
+        _canPause = true;
+    }
+
+    public void ChangePauseNoEvent(bool isPause)
+    {
+        _isPaused = isPause;
+        Time.timeScale = _isPaused ? 0.0f : 1.0f;
+        Cursor.lockState = CursorLockMode.None;
+        _canPause = isPause;
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class UiPauseMenu : MonoBehaviour
 {
     [SerializeField] private Button _btnBack;
+    [SerializeField] private Button _btnMainMenu;
     private CanvasGroup _canvas;
 
     private void Awake()
@@ -14,8 +15,7 @@ public class UiPauseMenu : MonoBehaviour
     private void Start()
     {
         _btnBack.onClick.AddListener(OnBackClicked);
-
-        Cursor.lockState = CursorLockMode.Locked;
+        _btnMainMenu.onClick.AddListener(OnMainMenuClicked);
 
         if (!GameBootstrapper.Instance) return;
 
@@ -35,6 +35,13 @@ public class UiPauseMenu : MonoBehaviour
     {
         if (!GameBootstrapper.Instance) return;
         GameBootstrapper.Instance.PauseManager.ChangePause(false);
+    }
+
+    private void OnMainMenuClicked()
+    {
+        if (!GameBootstrapper.Instance) return;
+        GameBootstrapper.Instance.PauseManager.ChangePause(false);
+        GameBootstrapper.Instance.CustomSceneManager.GoToMainMenuNoLoading();
     }
 
     private void OnPauseChanged_ToogleCanvas(bool isPaused)

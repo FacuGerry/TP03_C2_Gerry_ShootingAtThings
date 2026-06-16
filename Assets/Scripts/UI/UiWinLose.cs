@@ -60,20 +60,18 @@ public class UiWinLose : MonoBehaviour
         if (GameBootstrapper.Instance)
             GameBootstrapper.Instance.CustomSceneManager.ActivateLoadedScene();
 
-        GameBootstrapper.Instance.PauseManager.ChangePause(false);
+        GameBootstrapper.Instance.PauseManager.ChangePauseNoEvent(false);
     }
 
     private void OnMaxScoreGotten_ActivateWinPanel()
     {
-        Cursor.lockState = CursorLockMode.None;
         _panelWin.SetActive(true);
-        GameBootstrapper.Instance.PauseManager.ChangePause(true);
+        GameBootstrapper.Instance.PauseManager.ChangePauseNoEvent(true);
     }
 
     private void OnPlayerDie_ActivateLosePanel()
     {
-        Cursor.lockState = CursorLockMode.None;
         _panelLose.SetActive(true);
-        GameBootstrapper.Instance.PauseManager.ChangePause(true);
+        GameBootstrapper.Instance.PauseManager.ChangePauseNoEvent(true);
     }
 }

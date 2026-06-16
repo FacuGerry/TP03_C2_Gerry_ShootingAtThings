@@ -28,6 +28,8 @@ public class MainMenuButtons : MonoBehaviour
 
     private void Start()
     {
+        Cursor.lockState = CursorLockMode.None;
+
         _btnPlay.onClick.AddListener(OnStartPressed);
         _btnSettings.onClick.AddListener(OnSettingsPressed);
         _btnCredits.onClick.AddListener(OnCreditsPressed);

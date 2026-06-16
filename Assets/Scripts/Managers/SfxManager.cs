@@ -3,17 +3,21 @@ using UnityEngine;
 public class SfxManager : MonoBehaviour
 {
     private SoundDataSO _data;
+    private AudioSource _music;
     private AudioSource _sfx;
     private AudioSource _ui;
 
-    public void Init(SoundDataSO soundSettings, AudioSource sfx, AudioSource ui)
+    public void Init(SoundDataSO soundSettings, AudioSource music, AudioSource sfx, AudioSource ui)
     {
         _data = soundSettings;
+        _music = music;
         _sfx = sfx;
         _ui = ui;
 
         _sfx.transform.SetParent(transform);
         _ui.transform.SetParent(transform);
+
+        _music.Play();
     }
 
 

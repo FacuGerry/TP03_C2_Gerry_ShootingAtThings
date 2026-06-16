@@ -25,4 +25,4 @@ MonoBehaviour:
   enemyDie: {fileID: 8300000, guid: 5c7b6d4002009e842bd2621585546d19, type: 3}
   btnHover: {fileID: 8300000, guid: 35cf7766e9e2aa542811e896fde57989, type: 3}
   btnClick: {fileID: 8300000, guid: c5cb2ac29e89dbf43a9b644caaad45e6, type: 3}
-  bckgMusic: {fileID: 0}
+  bckgMusic: {fileID: 8300000, guid: 937cceeb84f68d1488e4063203a3b605, type: 3}

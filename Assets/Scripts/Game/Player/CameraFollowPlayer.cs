@@ -20,6 +20,7 @@ public class CameraFollowPlayer : MonoBehaviour
         _player = _anchors.playerTransform;
         transform.position = _camera.position;
         _chngWpn = _player.GetComponent<ChangeWeapon>();
+        _weapon = _chngWpn.ActiveWeaponPivot.transform;
     }
 
     private void Update()

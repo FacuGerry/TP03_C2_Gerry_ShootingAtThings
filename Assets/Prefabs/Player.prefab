@@ -133,7 +133,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerShoot
   _shootingPos: {fileID: 7954879257139516676}
-  _laser: {fileID: 0}
   _anim: {fileID: 1239833301886963202}
   _weaponsDataList:
   - {fileID: 11400000, guid: 95e0ffd9febd20e4aafe853603740309, type: 2}

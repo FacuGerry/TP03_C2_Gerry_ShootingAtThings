@@ -15,6 +15,7 @@ public class GameBootstrapper : MonoBehaviour
     [SerializeField] private PoolSettingsSO _poolSettings;
     [SerializeField] private SoundDataSO _soundSettings;
     [SerializeField] private ScoreDataSO _scoreData;
+    [SerializeField] private AudioSource _sourceMusic;
     [SerializeField] private AudioSource _sourceSfx;
     [SerializeField] private AudioSource _sourceUi;
 
@@ -83,7 +84,7 @@ public class GameBootstrapper : MonoBehaviour
         GameObject go = new("Sfx Manager");
         go.transform.SetParent(transform);
         SfxManager = go.AddComponent<SfxManager>();
-        SfxManager.Init(_soundSettings, _sourceSfx, _sourceUi);
+        SfxManager.Init(_soundSettings, _sourceMusic, _sourceSfx, _sourceUi);
     }
 
     private void InitializeScoreManager()

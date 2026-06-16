@@ -107,6 +107,11 @@ MonoBehaviour:
   _anchors: {fileID: 11400000, guid: d73f25a1bced2dc498a9791e0ef31b54, type: 2}
   _cameraPos: {fileID: 4909851031048575434}
   _anim: {fileID: 1239833301886963202}
+  _raycastHeightOffset: 0.5
+  _maxSlopeAngle: 15
+  _terrainLayerMask:
+    serializedVersion: 2
+    m_Bits: 2048
 --- !u!114 &2961865295685344642
 MonoBehaviour:
   m_ObjectHideFlags: 0

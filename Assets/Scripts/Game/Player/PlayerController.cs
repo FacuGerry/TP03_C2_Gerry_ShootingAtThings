@@ -20,6 +20,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform _cameraPos;
     [SerializeField] private Animator _anim;
 
+    [Header("Checks for movement")]
+    [SerializeField] private float _raycastHeightOffset;
+    [SerializeField] private float _maxSlopeAngle;
+    [SerializeField] private LayerMask _terrainLayerMask;
+
     public Vector2 MoveInput { get; private set; } = Vector2.zero;
     public bool IsWalking { get; private set; } = false;
     public bool WantsCrouch { get; private set; } = false;
@@ -124,6 +129,8 @@ public class PlayerController : MonoBehaviour
         Vector3 direction = transform.forward * MoveInput.y + transform.right * MoveInput.x;
         _direction = direction.normalized;
 
+        if (!CanMoveToNextPosition(transform.position + transform.forward)) _direction = Vector3.zero;
+
         if (IsCrouching)
             _speedChanger = 0.75f;
         else
@@ -173,5 +180,19 @@ public class PlayerController : MonoBehaviour
         _rb.linearVelocity = Vector3.zero;
         _rb.angularVelocity = Vector3.zero;
         SwitchState(FindState(StateTypePlayer.Die));
+    }
+
+    private bool CanMoveToNextPosition(Vector3 nextPos)
+    {
+        Vector3 rayOrigin = nextPos + (Vector3.up * _raycastHeightOffset);
+
+        if (Physics.Raycast(rayOrigin, Vector3.down, out RaycastHit hit, _raycastHeightOffset * 2f, _terrainLayerMask))
+        {
+            float slopeAngle = Vector3.Angle(Vector3.up, hit.normal);
+
+            return slopeAngle <= _maxSlopeAngle;
+        }
+
+        return true;
     }
 }

@@ -323,7 +323,7 @@ GameObject:
   m_Component:
   - component: {fileID: 133256087}
   - component: {fileID: 133256088}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: EnemySpawner (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -360,7 +360,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -1122,7 +1122,7 @@ GameObject:
   m_Component:
   - component: {fileID: 620349879}
   - component: {fileID: 620349880}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: EnemySpawner (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1159,7 +1159,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -2759,7 +2759,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1565633172}
   - component: {fileID: 1565633173}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: EnemySpawner (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2796,7 +2796,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -3314,7 +3314,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2088382258}
   - component: {fileID: 2088382257}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: EnemySpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3336,7 +3336,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3

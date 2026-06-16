@@ -15,7 +15,6 @@ public class EnemyShoot : MonoBehaviour
     public Transform ShootingPos => _shootingPos;
     private IEnumerator _coroutineAiming = null;
     private IEnumerator _coroutineShooting = null;
-    private IEnumerator _coroutineThrowing = null;
     private bool _isShooting = false;
 
     private void Awake()
@@ -86,35 +85,6 @@ public class EnemyShoot : MonoBehaviour
         yield return null;
     }
 
-    private IEnumerator Throwing(Transform startPos)
-    {
-        if (GameBootstrapper.Instance == null)
-        {
-            Debug.LogError("THERE IS NO BOOTSTRAPPER");
-            yield return null;
-        }
-        while (_isShooting)
-        {
-            BulletEnemy bullet = GameBootstrapper.Instance.PoolManager.GetInstanceFromPool<BulletEnemy>();
-            if (bullet == null)
-            {
-                yield return null;
-                Debug.LogError("NO MORE BULLETS");
-            }
-            bullet.Activate();
-
-            bullet.transform.position = startPos.position;
-
-            Vector3 playerVelocity = _controller.PlayerRb.linearVelocity;
-            playerVelocity.y = 0f;
-            Vector3 targetFuturePosition = _controller.Player.position + playerVelocity;
-
-            bullet.Move(startPos.position, targetFuturePosition, _controller.Data.throwingDuration, _controller.Data.shootingHeight);
-
-            yield return new WaitForSeconds(_controller.Data.shootingSpeed);
-        }
-    }
-
     public void AimAndShoot(bool isShooting)
     {
         _isShooting = isShooting;
@@ -145,21 +115,6 @@ public class EnemyShoot : MonoBehaviour
         {
             _coroutineShooting = NormalShooting();
             StartCoroutine(_coroutineShooting);
-        }
-    }
-
-    public void ThrowObject(bool isShooting, Transform startPos)
-    {
-        _isShooting = isShooting;
-        if (_coroutineThrowing != null)
-        {
-            StopCoroutine(_coroutineThrowing);
-            _coroutineThrowing = null;
-        }
-        if (isShooting)
-        {
-            _coroutineThrowing = Throwing(startPos);
-            StartCoroutine(_coroutineThrowing);
         }
     }
 }

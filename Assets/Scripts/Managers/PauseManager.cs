@@ -15,7 +15,7 @@ public class PauseManager : MonoBehaviour
                 ChangePause(!_isPaused);
     }
 
-    public void Init() => _isPaused = false;
+    public void Init() { }
 
     public void ChangePause(bool isPause)
     {

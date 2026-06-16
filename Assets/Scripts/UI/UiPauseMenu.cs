@@ -17,8 +17,9 @@ public class UiPauseMenu : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
 
-        if (GameBootstrapper.Instance)
-            GameBootstrapper.Instance.PauseManager.OnPauseChanged += OnPauseChanged_ToogleCanvas;
+        if (!GameBootstrapper.Instance) return;
+
+        GameBootstrapper.Instance.PauseManager.OnPauseChanged += OnPauseChanged_ToogleCanvas;
     }
 
     private void OnDestroy()
@@ -26,6 +27,7 @@ public class UiPauseMenu : MonoBehaviour
         _btnBack.onClick.RemoveAllListeners();
 
         if (!GameBootstrapper.Instance) return;
+
         GameBootstrapper.Instance.PauseManager.OnPauseChanged -= OnPauseChanged_ToogleCanvas;
     }
 

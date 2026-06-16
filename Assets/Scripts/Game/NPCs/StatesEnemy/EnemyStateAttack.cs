@@ -32,7 +32,6 @@ public class EnemyStateAttack : EnemyStates
                 break;
 
             case EnemyAttackType.ThrowObject:
-                _controller.Shoot.ThrowObject(true, _controller.Shoot.ShootingPos);
                 break;
         }
 
@@ -66,7 +65,6 @@ public class EnemyStateAttack : EnemyStates
                 break;
 
             case EnemyAttackType.ThrowObject:
-                _controller.Shoot.ThrowObject(false, _controller.Shoot.ShootingPos);
                 break;
         }
 

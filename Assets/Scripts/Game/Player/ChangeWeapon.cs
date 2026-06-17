@@ -8,9 +8,11 @@ public class ChangeWeapon : MonoBehaviour
     [SerializeField] private WeaponIkFollower _ik;
     [SerializeField] private List<GameObject> _weaponsList = new();
     [SerializeField] private List<Transform> _weaponPivotsList = new();
+    [SerializeField] private List<Transform> _weaponShootingPosList = new();
     public int Index { get; private set; } = 0;
     public GameObject ActiveWeapon => _weaponsList[Index];
     public Transform ActiveWeaponPivot => _weaponPivotsList[Index];
+    public Transform ActiveWeaponShootingPos => _weaponShootingPosList[Index];
 
     private void Awake()
     {

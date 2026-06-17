@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class PlayerShoot : MonoBehaviour
 {
-    [SerializeField] private Transform _shootingPos;
     [SerializeField] private Animator _anim;
     [SerializeField] private List<WeaponDataSO> _weaponsDataList;
     [SerializeField] private float _animationDuration = 1.167f;
@@ -50,7 +49,7 @@ public class PlayerShoot : MonoBehaviour
 
         while (_isShooting)
         {
-            if (Physics.Raycast(_shootingPos.position, _shootingPos.forward, out RaycastHit ray, _weaponsDataList[_changeWeapon.Index].shootingDistance))
+            if (Physics.Raycast(_changeWeapon.ActiveWeaponShootingPos.position, _changeWeapon.ActiveWeaponShootingPos.forward, out RaycastHit ray, _weaponsDataList[_changeWeapon.Index].shootingDistance))
             {
                 if (ray.collider && ray.collider.TryGetComponent(out IDamageable damage))
                 {
@@ -66,7 +65,7 @@ public class PlayerShoot : MonoBehaviour
 
             ParticleShoot particle = GameBootstrapper.Instance.PoolManager.GetInstanceFromPool<ParticleShoot>();
             particle.Activate();
-            particle.transform.position = _shootingPos.position;
+            particle.transform.position = _changeWeapon.ActiveWeaponShootingPos.position;
             particle.ParticleSystem.Play();
 
             yield return new WaitForSeconds(_weaponsDataList[_changeWeapon.Index].shootingSpeed);

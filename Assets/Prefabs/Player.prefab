@@ -137,7 +137,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e524a5d54e250094593fbf21027bba6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerShoot
-  _shootingPos: {fileID: 7954879257139516676}
   _anim: {fileID: 1239833301886963202}
   _weaponsDataList:
   - {fileID: 11400000, guid: 95e0ffd9febd20e4aafe853603740309, type: 2}
@@ -162,6 +161,9 @@ MonoBehaviour:
   _weaponPivotsList:
   - {fileID: 6207530614704605600}
   - {fileID: 3548464098591459172}
+  _weaponShootingPosList:
+  - {fileID: 7954879257139516676}
+  - {fileID: 684074289673886656}
 --- !u!1 &5010717921206583124
 GameObject:
   m_ObjectHideFlags: 0
@@ -482,6 +484,11 @@ PrefabInstance:
 --- !u!1 &248198331392469934 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 742821998072145001, guid: 2ad3ef9f774ce044a9a0d9a1a2b37ca6, type: 3}
+  m_PrefabInstance: {fileID: 666198195588665287}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &684074289673886656 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 18188445716108295, guid: 2ad3ef9f774ce044a9a0d9a1a2b37ca6, type: 3}
   m_PrefabInstance: {fileID: 666198195588665287}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &3548464098591459172 stripped

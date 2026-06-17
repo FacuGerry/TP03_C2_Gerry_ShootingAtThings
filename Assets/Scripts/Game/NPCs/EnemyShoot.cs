@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using static UnityEngine.ParticleSystem;
 
 [RequireComponent(typeof(NpcController))]
 
@@ -53,11 +54,23 @@ public class EnemyShoot : MonoBehaviour
                     Debug.Log("Shot and missed");
 
                 GameBootstrapper.Instance.SfxManager.OnEnemyShootLaser_PlayClip();
+
+                ParticleShoot particle = GameBootstrapper.Instance.PoolManager.GetInstanceFromPool<ParticleShoot>();
+                particle.Activate();
+                particle.transform.position = ShootingPos.position;
+                particle.ParticleSystem.Play();
+
+                yield return new WaitForSeconds(_controller.Data.shootingSpeed);
+
+                if (_laser != null)
+                    _laser.SetActive(false);
+
+                if (!particle.ParticleSystem.isStopped)
+                    particle.ParticleSystem.Stop();
+
+                particle.DeActivate();
             }
 
-            if (_laser != null)
-                _laser.SetActive(false);
-            yield return new WaitForSeconds(_controller.Data.shootingSpeed);
             yield return null;
         }
         _coroutineAiming = null;
@@ -77,8 +90,19 @@ public class EnemyShoot : MonoBehaviour
                     Debug.Log("Shot " + ray.collider.gameObject.name, ray.collider.gameObject);
                 }
                 GameBootstrapper.Instance.SfxManager.OnEnemyShoot_PlayClip();
+
+                ParticleShoot particle = GameBootstrapper.Instance.PoolManager.GetInstanceFromPool<ParticleShoot>();
+                particle.Activate();
+                particle.transform.position = ShootingPos.position;
+                particle.ParticleSystem.Play();
+
+                yield return new WaitForSeconds(_controller.Data.shootingSpeed);
+
+                if (!particle.ParticleSystem.isStopped)
+                    particle.ParticleSystem.Stop();
+
+                particle.DeActivate();
             }
-            yield return new WaitForSeconds(_controller.Data.shootingSpeed);
             yield return null;
         }
         _coroutineShooting = null;

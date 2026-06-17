@@ -8,6 +8,7 @@ public class PlayerHealthSystem : MonoBehaviour, IDamageable
     public event Action OnPlayerDie;
 
     [SerializeField] private int _maxLife;
+    [SerializeField] private float _timeToWaitForEvent = 2.5f;
     private int _currentLife;
     private PlayerController _controller;
 
@@ -32,7 +33,7 @@ public class PlayerHealthSystem : MonoBehaviour, IDamageable
 
     private IEnumerator WaitingForDie()
     {
-        float clock = 3f;
+        float clock = _timeToWaitForEvent;
         while (clock >= 0f)
         {
             clock -= Time.deltaTime;

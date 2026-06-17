@@ -26,4 +26,6 @@
 ### Itch
 https://facugerry.itch.io/bullet-master
 
+![Screenshot 1](https://img.itch.zone/aW1hZ2UvNDY2MTA4MC8yNzkwNzMzNy5wbmc=/347x500/Cevg%2Fw.png)
+
 ### Game made by FacuGerry

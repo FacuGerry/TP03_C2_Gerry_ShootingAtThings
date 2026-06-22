@@ -281,7 +281,7 @@ MonoBehaviour:
   m_text: "Game made by FacuGerry for TDMT 1A 2C - PVCM I\nAssets were taken from:\n\n-
     Mixamo\n- Mini Drone Set 1\n- RPG Essentials Sound Effects - FREE!\n- Guns Pack:
     Low Poly Guns Collection\n- Terrain Textures - FREE\n- Fantasy Skybox FREE\n-
-    Hit Effects FREE \n- Free Casual Music Pack"
+    Hit Effects FREE \n- Free Casual Music Pack\n- Low Poly Simple Medieval Props"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ef904efb5898feb47921116aeec6deb2, type: 2}
   m_sharedMaterial: {fileID: 5718514766596707313, guid: ef904efb5898feb47921116aeec6deb2, type: 2}

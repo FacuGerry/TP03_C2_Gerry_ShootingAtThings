@@ -92,16 +92,22 @@ public class EnemyShoot : MonoBehaviour
                 GameBootstrapper.Instance.SfxManager.OnEnemyShoot_PlayClip();
 
                 ParticleShoot particle = GameBootstrapper.Instance.PoolManager.GetInstanceFromPool<ParticleShoot>();
-                particle.Activate();
-                particle.transform.position = ShootingPos.position;
-                particle.ParticleSystem.Play();
+                if (particle != null)
+                {
+                    particle.Activate();
+                    particle.transform.position = ShootingPos.position;
+                    particle.ParticleSystem.Play();
+                }
 
                 yield return new WaitForSeconds(_controller.Data.shootingSpeed);
 
-                if (!particle.ParticleSystem.isStopped)
-                    particle.ParticleSystem.Stop();
+                if (particle != null)
+                {
+                    if (!particle.ParticleSystem.isStopped)
+                        particle.ParticleSystem.Stop();
 
-                particle.DeActivate();
+                    particle.DeActivate();
+                }
             }
             yield return null;
         }

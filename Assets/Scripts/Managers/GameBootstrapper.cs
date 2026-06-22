@@ -47,6 +47,10 @@ public class GameBootstrapper : MonoBehaviour
         InitializeSfxManager();
         InitializeScoreManager();
         InitializePauseManager();
+    }
+
+    private void Start()
+    {
         StartSoundVolume();
     }
 

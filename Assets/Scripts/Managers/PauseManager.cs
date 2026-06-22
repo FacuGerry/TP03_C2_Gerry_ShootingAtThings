@@ -27,11 +27,19 @@ public class PauseManager : MonoBehaviour
         _canPause = true;
     }
 
-    public void ChangePauseNoEvent(bool isPause)
+    public void PauseGameNoEvent()
     {
-        _isPaused = isPause;
+        _isPaused = true;
         Time.timeScale = _isPaused ? 0.0f : 1.0f;
         Cursor.lockState = CursorLockMode.None;
-        _canPause = isPause;
+        _canPause = false;
+    }
+
+    public void ResetPause()
+    {
+        _isPaused = false;
+        Time.timeScale = 1.0f;
+        Cursor.lockState = CursorLockMode.None;
+        _canPause = true;
     }
 }

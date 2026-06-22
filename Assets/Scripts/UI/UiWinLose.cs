@@ -57,21 +57,21 @@ public class UiWinLose : MonoBehaviour
 
     private void GoToMainMenu()
     {
+        GameBootstrapper.Instance.PauseManager.ResetPause();
+
         if (GameBootstrapper.Instance)
             GameBootstrapper.Instance.CustomSceneManager.ActivateLoadedScene();
-
-        GameBootstrapper.Instance.PauseManager.ChangePauseNoEvent(false);
     }
 
     private void OnMaxScoreGotten_ActivateWinPanel()
     {
         _panelWin.SetActive(true);
-        GameBootstrapper.Instance.PauseManager.ChangePauseNoEvent(true);
+        GameBootstrapper.Instance.PauseManager.PauseGameNoEvent();
     }
 
     private void OnPlayerDie_ActivateLosePanel()
     {
         _panelLose.SetActive(true);
-        GameBootstrapper.Instance.PauseManager.ChangePauseNoEvent(true);
+        GameBootstrapper.Instance.PauseManager.PauseGameNoEvent();
     }
 }

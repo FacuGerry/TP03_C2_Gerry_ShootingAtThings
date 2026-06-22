@@ -182,6 +182,7 @@ MonoBehaviour:
   _sourceMusic: {fileID: 3961821264253479613}
   _sourceSfx: {fileID: 2160211952228427393}
   _sourceUi: {fileID: 4415075970962033901}
+  _data: {fileID: 11400000, guid: f30c0bae871d12e448c564deb766cce7, type: 2}
 --- !u!1 &6377313976859712262
 GameObject:
   m_ObjectHideFlags: 0

@@ -42,7 +42,6 @@ public class PlayerShoot : MonoBehaviour
 
     private IEnumerator Shooting()
     {
-        Debug.Log("Shooting");
         CalculateSpeedForAnim();
 
         if (!GameBootstrapper.Instance) yield return null;
@@ -54,7 +53,6 @@ public class PlayerShoot : MonoBehaviour
                 if (ray.collider && ray.collider.TryGetComponent(out IDamageable damage))
                 {
                     damage.TakeDamage(_weaponsDataList[_changeWeapon.Index].shootingDamage);
-                    Debug.Log("Shot " + ray.collider.gameObject.name, ray.collider.gameObject);
                 }
             }
 
@@ -81,7 +79,6 @@ public class PlayerShoot : MonoBehaviour
             yield return null;
         }
 
-        Debug.Log("Stopped shooting");
         _startedShooting = false;
         yield return null;
     }

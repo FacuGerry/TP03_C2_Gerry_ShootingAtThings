@@ -40,8 +40,6 @@ public class MyPoolManager : MonoBehaviour
                 parent.transform.SetParent(transform);
                 CreatePool(pool.prefab.gameObject, parent.transform, pool.quantity, _pooleablesDictionary[type]);
             }
-            else
-                Debug.Log("Pool of " + type.Name + " already exists!!!");
         }
     }
 

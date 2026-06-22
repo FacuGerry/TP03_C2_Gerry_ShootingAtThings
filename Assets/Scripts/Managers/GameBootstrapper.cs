@@ -47,6 +47,7 @@ public class GameBootstrapper : MonoBehaviour
         InitializeSfxManager();
         InitializeScoreManager();
         InitializePauseManager();
+        StartSoundVolume();
     }
 
     private void OnDestroy()
@@ -101,5 +102,21 @@ public class GameBootstrapper : MonoBehaviour
         go.transform.SetParent(transform);
         PauseManager = go.AddComponent<PauseManager>();
         PauseManager.Init();
+    }
+
+    private void StartSoundVolume()
+    {
+        ChangeVolume("MasterVol", 0.5f);
+        ChangeVolume("MusicVol", 0.75f);
+        ChangeVolume("SfxVol", 0.75f);
+    }
+
+    private void ChangeVolume(string channel, float vol)
+    {
+        float volume = Mathf.Log10(vol) * 20;
+        _soundSettings.mixer.SetFloat(channel, volume);
+
+        PlayerPrefs.SetFloat(channel, vol);
+        PlayerPrefs.Save();
     }
 }

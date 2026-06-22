@@ -46,7 +46,6 @@ public class BulletEnemy : MonoBehaviour, IPooleable
         if (GameBootstrapper.Instance != null)
             GameBootstrapper.Instance.SfxManager.OnEnemyThrow_PlayClip();
 
-        Debug.Log("Threw something");
         _coroutineThrowing = null;
         DeActivate();
     }

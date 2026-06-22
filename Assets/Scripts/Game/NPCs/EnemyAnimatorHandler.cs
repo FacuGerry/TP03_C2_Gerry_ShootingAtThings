@@ -8,11 +8,8 @@ public class EnemyAnimatorHandler : MonoBehaviour
     public void OnThrowing()
     {
         BulletEnemy bullet = GameBootstrapper.Instance.PoolManager.GetInstanceFromPool<BulletEnemy>();
-        if (bullet == null)
-        {
-            Debug.LogError("NO MORE BULLETS");
-            return; 
-        }
+        if (bullet == null) return;
+        
         bullet.Activate();
 
         bullet.transform.position = _startPos.position;

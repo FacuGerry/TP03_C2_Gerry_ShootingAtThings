@@ -16,7 +16,6 @@ public class EnemyStateAttack : EnemyStates
         switch (_controller.AttackType)
         {
             case EnemyAttackType.None:
-                Debug.LogError("THERE WAS NO ATTACK TYPE ASSIGNED TO ENEMY", _controller.gameObject);
                 if (_controller.CanMove)
                     _controller.SwitchState(_controller.FindState(StateTypeEnemy.Roam));
                 else
@@ -53,7 +52,6 @@ public class EnemyStateAttack : EnemyStates
         switch (_controller.AttackType)
         {
             case EnemyAttackType.None:
-                Debug.LogError("THERE WAS NO ATTACK TYPE ASSIGNED TO ENEMY", _controller.gameObject);
                 break;
 
             case EnemyAttackType.AimAndShoot:

@@ -34,7 +34,6 @@ public class EnemyShoot : MonoBehaviour
         {
             if (_laser != null)
                 _laser.SetActive(true);
-            Debug.Log("Aiming...");
             GameBootstrapper.Instance.SfxManager.OnEnemyAim_PlayClip();
 
             _controller.GetAnim().SetInteger(_state, (int)StateTypeEnemy.Aim);
@@ -48,10 +47,7 @@ public class EnemyShoot : MonoBehaviour
                 if (ray.collider != null && ray.collider.TryGetComponent(out IDamageable damage))
                 {
                     damage.TakeDamage(_controller.Data.shootingDamage);
-                    Debug.Log("Shot " + ray.collider.gameObject.name, ray.collider.gameObject);
                 }
-                else
-                    Debug.Log("Shot and missed");
 
                 GameBootstrapper.Instance.SfxManager.OnEnemyShootLaser_PlayClip();
 
@@ -79,7 +75,6 @@ public class EnemyShoot : MonoBehaviour
 
     private IEnumerator NormalShooting()
     {
-        Debug.Log("Shooting normally");
         while (_isShooting)
         {
             if (Physics.Raycast(ShootingPos.position, ShootingPos.forward, out RaycastHit ray, _controller.Data.distanceToShoot))
@@ -87,7 +82,6 @@ public class EnemyShoot : MonoBehaviour
                 if (ray.collider != null && ray.collider.TryGetComponent(out IDamageable damage))
                 {
                     damage.TakeDamage(_controller.Data.shootingDamage);
-                    Debug.Log("Shot " + ray.collider.gameObject.name, ray.collider.gameObject);
                 }
                 GameBootstrapper.Instance.SfxManager.OnEnemyShoot_PlayClip();
 

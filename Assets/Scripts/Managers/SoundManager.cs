@@ -13,19 +13,19 @@ public class SoundManager : MonoBehaviour
     {
         if (!PlayerPrefs.HasKey("MasterVol"))
         {
-            PlayerPrefs.SetFloat("MasterVol", 1f);
+            PlayerPrefs.SetFloat("MasterVol", 0.5f);
             PlayerPrefs.Save();
         }
 
         if (!PlayerPrefs.HasKey("MusicVol"))
         {
-            PlayerPrefs.SetFloat("MusicVol", 1f);
+            PlayerPrefs.SetFloat("MusicVol", 0.5f);
             PlayerPrefs.Save();
         }
 
         if (!PlayerPrefs.HasKey("SfxVol"))
         {
-            PlayerPrefs.SetFloat("SfxVol", 1f);
+            PlayerPrefs.SetFloat("SfxVol", 0.5f);
             PlayerPrefs.Save();
         }
 
@@ -48,8 +48,6 @@ public class SoundManager : MonoBehaviour
         _sliderMusic.onValueChanged.RemoveAllListeners();
         _sliderSFX.onValueChanged.RemoveAllListeners();
     }
-
-    public void Init() { }
 
     private void OnMasterChanged(float vol)
     {

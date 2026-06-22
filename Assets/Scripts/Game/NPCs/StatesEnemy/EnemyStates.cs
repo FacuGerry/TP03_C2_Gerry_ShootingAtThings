@@ -17,15 +17,9 @@ public abstract class EnemyStates
         _controller = controller;
     }
 
-    public virtual void OnEnter()
-    {
-        Debug.Log("Enter to " + state);
-    }
+    public virtual void OnEnter() { }
 
     public virtual void OnUpdate() { }
 
-    public virtual void OnExit()
-    {
-        Debug.Log("Exit from " + state);
-    }
+    public virtual void OnExit() { }
 }

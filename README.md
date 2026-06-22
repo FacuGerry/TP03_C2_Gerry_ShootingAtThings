@@ -11,6 +11,8 @@
 > | MOUSE CURSOR | Look Around |
 > | Left Click | Shoot |
 > | Mouse Scrollwheel / Numbers (1-2) | Change Weapon |
+>
+> ** GET TO 1050 POINTS TO WIN!!! **
 
 > [!IMPORTANT]
 > ### Credits

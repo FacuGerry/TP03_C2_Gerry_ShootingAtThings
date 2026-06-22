@@ -22,7 +22,7 @@
 > - https://assetstore.unity.com/packages/vfx/particles/hit-effects-free-284613
 > - https://assetstore.unity.com/packages/2d/textures-materials/sky/fantasy-skybox-free-18353
 > - https://assetstore.unity.com/packages/audio/music/free-casual-music-pack-242591
-> - https://assetstore.unity.com/packages/p/realistic-tree-9-rainbow-tree-54622
+> - https://assetstore.unity.com/packages/3d/props/low-poly-simple-medieval-props-258397
 
 ### Itch
 https://facugerry.itch.io/bullet-master

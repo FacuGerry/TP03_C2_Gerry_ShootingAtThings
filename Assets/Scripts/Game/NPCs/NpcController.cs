@@ -1,11 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(Rigidbody), typeof(EnemyShoot))]
-
 public class NpcController : MonoBehaviour
 {
+    public event Action OnEnemyDie;
+    public event Action<Vector3> OnEnemyDieSendPosition;
+
     [SerializeField] private EnemyDataSO _data;
     [SerializeField] private WaypointsDataSO _waypoints;
     [SerializeField] private Animator _anim;
@@ -143,4 +146,10 @@ public class NpcController : MonoBehaviour
     }
 
     public Animator GetAnim() => _anim;
+
+    public void SetDieEventAndDeActivate()
+    {
+        OnEnemyDieSendPosition?.Invoke(transform.position);
+        OnEnemyDie?.Invoke();
+    }
 }

@@ -14,9 +14,26 @@ public class EnemyHealthSystem : MonoBehaviour, IDamageable
     private int _health = 0;
     private bool _hasDied = false;
 
+    private NpcController _controller;
+
+    private void Awake()
+    {
+        _controller = GetComponent<NpcController>();
+    }
+
+    private void OnEnable()
+    {
+        _controller.OnEnemyDie += RestartHealth;
+    }
+
     private void Start()
     {
         _health = _maxHealth;
+    }
+
+    private void OnDisable()
+    {
+        _controller.OnEnemyDie -= RestartHealth;
     }
 
     public void TakeDamage(int damage)
@@ -52,5 +69,10 @@ public class EnemyHealthSystem : MonoBehaviour, IDamageable
             if (GameBootstrapper.Instance == null) return;
             GameBootstrapper.Instance.SfxManager.OnEnemyDamaged_PlayClip();
         }
+    }
+
+    private void RestartHealth()
+    {
+        _health = _maxHealth;
     }
 }
